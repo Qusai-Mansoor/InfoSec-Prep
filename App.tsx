@@ -244,6 +244,17 @@ const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComple
     }
   };
 
+  const handleSkip = () => {
+    if (currentIndex < QUESTIONS.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+      setSelectedOption(null);
+      setIsSubmitted(false);
+    } else {
+      // If last question, go back to dashboard
+      onComplete();
+    }
+  };
+
   // Helper for option styling with higher contrast colors
   const getOptionStyle = (optKey: 'a'|'b'|'c'|'d') => {
     const base = "w-full p-4 rounded-lg border-2 text-left transition-all relative outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 ";
@@ -332,23 +343,35 @@ const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComple
              Previous
            </button>
 
-           {!isSubmitted ? (
-             <button 
-               onClick={handleSubmit} 
-               disabled={!selectedOption}
-               className={`bg-slate-900 text-white px-8 py-3 rounded-lg font-bold transition-all ${!selectedOption ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-800 shadow-md transform active:scale-95'}`}
-             >
-               Submit Answer
-             </button>
-           ) : (
-            <button 
-              onClick={handleNext} 
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition-all shadow-md flex items-center gap-2 transform active:scale-95"
-            >
-              {currentIndex === QUESTIONS.length - 1 ? 'Finish' : 'Next Question'}
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-            </button>
-           )}
+           <div className="flex gap-3">
+             {/* Skip Button - only show before submission */}
+             {!isSubmitted && (
+               <button 
+                 onClick={handleSkip}
+                 className="text-slate-600 font-bold px-6 py-3 hover:bg-slate-100 rounded-lg transition-colors border border-slate-300"
+               >
+                 Skip
+               </button>
+             )}
+
+             {!isSubmitted ? (
+               <button 
+                 onClick={handleSubmit} 
+                 disabled={!selectedOption}
+                 className={`bg-slate-900 text-white px-8 py-3 rounded-lg font-bold transition-all ${!selectedOption ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-800 shadow-md transform active:scale-95'}`}
+               >
+                 Submit Answer
+               </button>
+             ) : (
+              <button 
+                onClick={handleNext} 
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition-all shadow-md flex items-center gap-2 transform active:scale-95"
+              >
+                {currentIndex === QUESTIONS.length - 1 ? 'Finish' : 'Next Question'}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              </button>
+             )}
+           </div>
         </div>
       </div>
     </div>
