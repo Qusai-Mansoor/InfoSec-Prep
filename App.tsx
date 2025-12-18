@@ -432,6 +432,11 @@ const Quiz: React.FC<{ user: User; onComplete: () => void; topicId: string }> = 
   const [currentIndex, setCurrentIndex] = useState(getInitialIndex());
   const [selectedOption, setSelectedOption] = useState<'a'|'b'|'c'|'d' | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  // Get progress for all questions in this topic
+  const userProgress = db.getUserProgress(user.id);
+  const progressMap = new Map(userProgress.map(p => [p.questionId, p]));
 
   // When view changes or component remounts, ensure we verify index again if needed, 
   // but useState(getInitialIndex()) handles the initial mount correctly.
@@ -480,6 +485,13 @@ const Quiz: React.FC<{ user: User; onComplete: () => void; topicId: string }> = 
     }
   };
 
+  const handleJumpToQuestion = (index: number) => {
+    setCurrentIndex(index);
+    setSelectedOption(null);
+    setIsSubmitted(false);
+    setShowSidebar(false); // Close sidebar on mobile after selection
+  };
+
   // Helper for option styling with higher contrast colors
   const getOptionStyle = (optKey: 'a'|'b'|'c'|'d') => {
     const base = "w-full p-4 rounded-lg border-2 text-left transition-all relative outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 ";
@@ -502,13 +514,121 @@ const Quiz: React.FC<{ user: User; onComplete: () => void; topicId: string }> = 
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-3xl min-h-[calc(100vh-80px)] flex flex-col justify-center">
-      
-      {/* Progress Header */}
-      <div className="mb-6 flex justify-between items-center text-sm font-semibold text-slate-600">
-        <span>Question {currentIndex + 1} of {totalQuestions}</span>
-        <span className="bg-slate-200 text-slate-800 px-3 py-1 rounded-full text-xs uppercase tracking-wide">{question.category || "General"}</span>
+    <div className="flex h-[calc(100vh-80px)]">
+      {/* Question Navigation Sidebar */}
+      <div className={`
+        fixed lg:static inset-y-0 left-0 z-40 w-72 bg-white border-r border-slate-200 
+        transform transition-transform duration-300 ease-in-out overflow-y-auto
+        ${showSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        <div className="p-4 border-b border-slate-200 sticky top-0 bg-white z-10">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="font-bold text-slate-900">Questions</h3>
+            <button 
+              onClick={() => setShowSidebar(false)}
+              className="lg:hidden p-1 hover:bg-slate-100 rounded"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div className="text-xs text-slate-600">
+            {progressMap.size} / {totalQuestions} completed
+          </div>
+        </div>
+
+        <div className="p-3 grid grid-cols-5 gap-2">
+          {filteredQuestions.map((q, idx) => {
+            const progress = progressMap.get(q.id);
+            const isCurrent = idx === currentIndex;
+            const isAttempted = !!progress;
+            const isCorrect = progress?.isCorrect;
+
+            return (
+              <button
+                key={q.id}
+                onClick={() => handleJumpToQuestion(idx)}
+                className={`
+                  aspect-square rounded-lg font-bold text-xs transition-all relative
+                  ${isCurrent 
+                    ? 'bg-blue-600 text-white ring-2 ring-blue-400 ring-offset-2 scale-110' 
+                    : isAttempted
+                      ? isCorrect
+                        ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border-2 border-emerald-300'
+                        : 'bg-red-100 text-red-800 hover:bg-red-200 border-2 border-red-300'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border-2 border-slate-200'
+                  }
+                `}
+                title={`Question ${idx + 1}${isAttempted ? (isCorrect ? ' - Correct' : ' - Incorrect') : ' - Not attempted'}`}
+              >
+                {idx + 1}
+                {isAttempted && (
+                  <div className="absolute -top-1 -right-1">
+                    {isCorrect ? (
+                      <svg className="w-3.5 h-3.5 text-emerald-600 bg-white rounded-full" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    ) : (
+                      <svg className="w-3.5 h-3.5 text-red-600 bg-white rounded-full" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="p-4 border-t border-slate-200 text-xs text-slate-500 space-y-2">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-blue-600 rounded"></div>
+            <span>Current</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-emerald-100 border-2 border-emerald-300 rounded"></div>
+            <span>Correct</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-red-100 border-2 border-red-300 rounded"></div>
+            <span>Incorrect</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-slate-100 border-2 border-slate-200 rounded"></div>
+            <span>Not attempted</span>
+          </div>
+        </div>
       </div>
+
+      {/* Overlay for mobile */}
+      {showSidebar && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={() => setShowSidebar(false)}
+        />
+      )}
+
+      {/* Main Content */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="container mx-auto p-4 max-w-3xl min-h-full flex flex-col justify-center">
+          
+          {/* Toggle Sidebar Button (Mobile) + Progress Header */}
+          <div className="mb-6 flex justify-between items-center text-sm font-semibold text-slate-600">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setShowSidebar(true)}
+                className="lg:hidden p-2 hover:bg-slate-100 rounded-lg"
+                title="Show question list"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+              <span>Question {currentIndex + 1} of {totalQuestions}</span>
+            </div>
+            <span className="bg-slate-200 text-slate-800 px-3 py-1 rounded-full text-xs uppercase tracking-wide">{question.category || "General"}</span>
+          </div>
 
       {/* Question Card */}
       <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
@@ -597,6 +717,8 @@ const Quiz: React.FC<{ user: User; onComplete: () => void; topicId: string }> = 
               </button>
              )}
            </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
