@@ -5,13 +5,38 @@ import { QUESTIONS } from './data/questions';
 
 // --- Constants ---
 const TOPICS = [
-  { id: 'all', name: 'All Topics', category: null },
-  { id: 'network', name: 'Network Security', category: 'Network Security' },
-  { id: 'access', name: 'Access Control', category: 'Access Control' },
-  { id: 'web', name: 'Web Security', category: 'Web Security' },
-  { id: 'sql', name: 'SQL Injection', category: 'SQL Injection' },
-  { id: 'cookies', name: 'Cookies', category: 'Cookies' },
-  { id: 'xss', name: 'XSS & CSRF', category: 'XSS and CSRF' },
+  // Overview
+  { id: 'all', name: 'All Topics', category: null, group: 'overview' },
+  { id: 'intro', name: 'Introduction to InfoSec', category: 'Introduction to Information Security', group: 'fundamentals' },
+  
+  // Network & Security Fundamentals
+  { id: 'network', name: 'Network Security', category: 'Network Security', group: 'fundamentals' },
+  { id: 'malware', name: 'Malware', category: 'Malware', group: 'fundamentals' },
+  { id: 'social', name: 'Social Engineering', category: 'Social Engineering', group: 'fundamentals' },
+  
+  // Cryptography
+  { id: 'crypto-classical', name: 'Classical Ciphers', category: 'Cryptography - Classical', group: 'cryptography' },
+  { id: 'crypto-des', name: 'DES', category: 'Cryptography - DES', group: 'cryptography' },
+  { id: 'crypto-aes', name: 'AES', category: 'Cryptography - AES', group: 'cryptography' },
+  { id: 'crypto-aes-key', name: 'AES Key Expansion', category: 'Cryptography - AES Key Expansion', group: 'cryptography' },
+  { id: 'crypto-rsa', name: 'RSA', category: 'Cryptography - RSA', group: 'cryptography' },
+  { id: 'crypto-dh', name: 'Diffie-Hellman', category: 'Cryptography - Diffie-Hellman', group: 'cryptography' },
+  { id: 'crypto-hash', name: 'Hash Functions & Digital Signatures', category: 'Hash Functions & Digital Signatures', group: 'cryptography' },
+  { id: 'crypto-standards', name: 'Cryptographic Standards', category: 'Cryptographic Standards', group: 'cryptography' },
+  
+  // Access Control
+  { id: 'access', name: 'Access Control', category: 'Access Control', group: 'access' },
+  { id: 'access-bio', name: 'Access Control & Biometrics', category: 'Access Control & Biometrics', group: 'access' },
+  
+  // Web Security
+  { id: 'web', name: 'Web Security', category: 'Web Security', group: 'web' },
+  { id: 'http', name: 'HTTP(S) Security', category: 'HTTP(S) Security', group: 'web' },
+  { id: 'cookies', name: 'Cookies', category: 'Cookies', group: 'web' },
+  { id: 'session', name: 'Session Management', category: 'Session Management', group: 'web' },
+  { id: 'sql', name: 'SQL Injection', category: 'SQL Injection', group: 'web' },
+  { id: 'xss', name: 'XSS', category: 'XSS', group: 'web' },
+  { id: 'csrf', name: 'CSRF', category: 'CSRF', group: 'web' },
+  { id: 'app-scenarios', name: 'Application Security Scenarios', category: 'Application Security Scenarios', group: 'web' },
 ];
 
 // --- Components ---
@@ -166,8 +191,10 @@ const Dashboard: React.FC<{ user: User; onStart: (topic: string) => void; onRese
       {/* Topic Selector */}
       <div className="mb-8">
         <h2 className="text-lg font-bold text-slate-800 mb-3">Choose a Topic</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {TOPICS.map((topic) => {
+        
+        {/* All Topics - Highlighted */}
+        <div className="mb-4">
+          {TOPICS.filter(t => t.group === 'overview').map((topic) => {
             const topicStats = getTopicStats(topic.category);
             const isSelected = selectedTopic === topic.id;
             
@@ -175,32 +202,40 @@ const Dashboard: React.FC<{ user: User; onStart: (topic: string) => void; onRese
               <button
                 key={topic.id}
                 onClick={() => setSelectedTopic(topic.id)}
-                className={`p-4 rounded-xl border-2 transition-all text-left ${
+                className={`w-full p-5 rounded-xl border-2 transition-all text-left ${
                   isSelected
-                    ? 'border-blue-600 bg-blue-50 shadow-md'
-                    : 'border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm'
+                    ? 'border-blue-600 bg-gradient-to-r from-blue-50 to-indigo-50 shadow-lg'
+                    : 'border-slate-300 bg-white hover:border-blue-400 hover:shadow-md'
                 }`}
               >
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className={`font-bold text-sm ${isSelected ? 'text-blue-900' : 'text-slate-800'}`}>
-                    {topic.name}
-                  </h3>
-                  {isSelected && (
-                    <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
-                  )}
-                </div>
-                <div className="space-y-1">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-slate-600">Progress</span>
-                    <span className={`font-bold ${isSelected ? 'text-blue-700' : 'text-slate-700'}`}>
-                      {topicStats.attempted}/{topicStats.total}
-                    </span>
+                    <div>
+                      <h3 className={`font-bold text-base ${isSelected ? 'text-blue-900' : 'text-slate-800'}`}>
+                        {topic.name}
+                      </h3>
+                      <p className="text-xs text-slate-600 mt-0.5">Complete question bank</p>
+                    </div>
                   </div>
-                  <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div className="flex items-center gap-4">
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-slate-900">{topicStats.attempted}/{topicStats.total}</div>
+                      <div className="text-xs text-slate-500">questions</div>
+                    </div>
+                    {isSelected && (
+                      <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-3">
+                  <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                     <div 
-                      className={`h-full rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-300'}`}
+                      className={`h-full rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-400'}`}
                       style={{ width: `${(topicStats.attempted / topicStats.total) * 100}%` }}
                     ></div>
                   </div>
@@ -209,6 +244,61 @@ const Dashboard: React.FC<{ user: User; onStart: (topic: string) => void; onRese
             );
           })}
         </div>
+
+        {/* Topic Groups */}
+        {[
+          { group: 'fundamentals', title: '🛡️ Security Fundamentals', color: 'emerald' },
+          { group: 'cryptography', title: '🔐 Cryptography', color: 'purple' },
+          { group: 'access', title: '🔑 Access Control', color: 'amber' },
+          { group: 'web', title: '🌐 Web Security', color: 'rose' },
+        ].map(({ group, title, color }) => (
+          <div key={group} className="mb-6">
+            <h3 className="text-sm font-bold text-slate-700 mb-3 uppercase tracking-wider">{title}</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {TOPICS.filter(t => t.group === group).map((topic) => {
+                const topicStats = getTopicStats(topic.category);
+                const isSelected = selectedTopic === topic.id;
+                
+                return (
+                  <button
+                    key={topic.id}
+                    onClick={() => setSelectedTopic(topic.id)}
+                    className={`p-4 rounded-xl border-2 transition-all text-left ${
+                      isSelected
+                        ? 'border-blue-600 bg-blue-50 shadow-md'
+                        : 'border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <h4 className={`font-bold text-sm leading-tight ${isSelected ? 'text-blue-900' : 'text-slate-800'}`}>
+                        {topic.name}
+                      </h4>
+                      {isSelected && (
+                        <svg className="w-5 h-5 text-blue-600 flex-shrink-0 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs">
+                        <span className="text-slate-600">Progress</span>
+                        <span className={`font-bold ${isSelected ? 'text-blue-700' : 'text-slate-700'}`}>
+                          {topicStats.attempted}/{topicStats.total}
+                        </span>
+                      </div>
+                      <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <div 
+                          className={`h-full rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-300'}`}
+                          style={{ width: `${(topicStats.attempted / topicStats.total) * 100}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

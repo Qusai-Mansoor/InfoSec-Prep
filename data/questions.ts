@@ -1408,5 +1408,1432 @@ export const QUESTIONS: Question[] = [
     correctOption: "c",
     justification: "Token + SameSite provides layered CSRF defense.",
     category: "XSS and CSRF"
+  },
+  // --- Lecture 01: Introduction to Information Security ---
+  {
+    id: 177,
+    question: "The \"CIA Triad\" consists of which three core principles?",
+    options: { a: "Confidentiality, Intelligence, Authentication", b: "Confidentiality, Integrity, Availability", c: "Control, Integrity, Authorization", d: "Cyber, Information, Assets" },
+    correctOption: "b",
+    justification: "The three core principles of the CIA Triad are Confidentiality, Integrity, and Availability[cite: 2, 4, 7].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 178,
+    question: "Which term describes the process of ensuring that data has not been altered or tampered with by unauthorized entities?",
+    options: { a: "Confidentiality", b: "Availability", c: "Integrity", d: "Non-repudiation" },
+    correctOption: "c",
+    justification: "Integrity is the process of ensuring data has not been altered or tampered with[cite: 8, 11, 13].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 179,
+    question: "In the \"Scooter and the Fence\" analogy, the \"Hole in the Fence\" represents which security term?",
+    options: { a: "Threat", b: "Asset", c: "Vulnerability", d: "Risk" },
+    correctOption: "c",
+    justification: "A vulnerability is a weakness, represented by the hole in the fence in this analogy[cite: 14, 17, 19].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 180,
+    question: "Which type of attacker is motivated by ideology, principles, or beliefs (e.g., Anonymous)?",
+    options: { a: "Script Kiddie", b: "Hacktivist", c: "Nation-State Actor", d: "Insider" },
+    correctOption: "b",
+    justification: "Hacktivists are attackers motivated by ideology, principles, or beliefs[cite: 20, 22, 25].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 181,
+    question: "Which step of the \"Cyber Kill Chain\" involves creating a deliverable payload (like a PDF with a virus)?",
+    options: { a: "Reconnaissance", b: "Weaponization", c: "Installation", d: "Command and Control" },
+    correctOption: "b",
+    justification: "Weaponization involves creating the deliverable payload[cite: 26, 28, 31].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 182,
+    question: "What is the definition of \"Risk\" in information security?",
+    options: { a: "A weakness in a system.", b: "The person carrying out the attack.", c: "The likelihood that a threat agent will exploit a vulnerability.", d: "An item of value to the organization." },
+    correctOption: "c",
+    justification: "Risk is defined as the likelihood that a threat agent will exploit a vulnerability[cite: 32, 35, 37].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 183,
+    question: "Which defense principle suggests using multiple different types of protection (e.g., Firewall + Antivirus + Strong Passwords) so that if one fails, others stand?",
+    options: { a: "Obscurity", b: "Limiting", c: "Layering (Defense in Depth)", d: "Simplicity" },
+    correctOption: "c",
+    justification: "Layering, or Defense in Depth, uses multiple types of protection[cite: 38, 41, 43].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 184,
+    question: "An attacker who lacks technical knowledge and uses automated tools (scripts) written by others is known as:",
+    options: { a: "Black Hat", b: "White Hat", c: "Script Kiddie", d: "Broker" },
+    correctOption: "c",
+    justification: "Script Kiddies lack technical knowledge and rely on tools written by others[cite: 44, 47, 49].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 185,
+    question: "The attack on \"Sony\" mentioned in the slides primarily utilized which attack vector to steal millions of accounts?",
+    options: { a: "Phishing", b: "SQL Injection", c: "DDoS", d: "Buffer Overflow" },
+    correctOption: "b",
+    justification: "The Sony attack mentioned utilized SQL Injection[cite: 50, 52, 55].",
+    category: "Introduction to Information Security"
+  },
+  {
+    id: 186,
+    question: "What is \"Security through Obscurity\"?",
+    options: { a: "Making the system code open source.", b: "Relying on hiding design details (like OS version or software brand) to provide security.", c: "Using complex encryption keys.", d: "Hiding the server in a dark room." },
+    correctOption: "b",
+    justification: "Security through Obscurity relies on hiding design details rather than strong controls[cite: 56, 58, 61].",
+    category: "Introduction to Information Security"
+  },
+
+  // --- Lecture 02: Malware ---
+  {
+    id: 187,
+    question: "Which type of malware self-replicates and spreads across a network without requiring a host program or user action?",
+    options: { a: "Virus", b: "Trojan", c: "Worm", d: "Logic Bomb" },
+    correctOption: "c",
+    justification: "A Worm self-replicates and spreads without a host program or user action[cite: 63, 66, 68].",
+    category: "Malware"
+  },
+  {
+    id: 188,
+    question: "A malicious program that masquerades as a legitimate application but performs malicious activities in the background is called:",
+    options: { a: "Worm", b: "Trojan Horse", c: "Rootkit", d: "Polymorphic Virus" },
+    correctOption: "b",
+    justification: "A Trojan Horse masquerades as a legitimate application[cite: 69, 71, 74].",
+    category: "Malware"
+  },
+  {
+    id: 189,
+    question: "Which type of malware encrypts a user's files and demands payment to decrypt them?",
+    options: { a: "Spyware", b: "Ransomware", c: "Adware", d: "Logic Bomb" },
+    correctOption: "b",
+    justification: "Ransomware encrypts files and demands payment[cite: 75, 77, 80].",
+    category: "Malware"
+  },
+  {
+    id: 190,
+    question: "What is a \"Rootkit\"?",
+    options: { a: "A program that records keystrokes.", b: "Malware that hides its presence by modifying the operating system's kernel or system files.", c: "A virus that infects the boot sector.", d: "Adware that displays pop-ups." },
+    correctOption: "b",
+    justification: "A Rootkit hides its presence by modifying the OS kernel or system files[cite: 81, 83, 86].",
+    category: "Malware"
+  },
+  {
+    id: 191,
+    question: "\"Stuxnet\" is a famous example of which type of attack?",
+    options: { a: "Adware", b: "Advanced Persistent Threat (APT) / Cyberwarfare weapon", c: "Ransomware", d: "SQL Injection" },
+    correctOption: "b",
+    justification: "Stuxnet is a prime example of an APT or Cyberwarfare weapon[cite: 87, 89, 92].",
+    category: "Malware"
+  },
+  {
+    id: 192,
+    question: "What is the difference between \"Polymorphic\" and \"Metamorphic\" malware?",
+    options: { a: "Polymorphic rewrites its code; Metamorphic encrypts its payload.", b: "Polymorphic uses a variable encryption key/decryptor; Metamorphic rewrites its internal code logic/instructions each iteration.", c: "Polymorphic targets Windows; Metamorphic targets Linux.", d: "There is no difference." },
+    correctOption: "b",
+    justification: "Polymorphic varies the encryption/decryptor, while Metamorphic rewrites its internal code logic[cite: 93, 95, 98].",
+    category: "Malware"
+  },
+  {
+    id: 193,
+    question: "A \"Logic Bomb\" is code that:",
+    options: { a: "Explodes the computer hardware.", b: "Lies dormant until a specific logical condition (e.g., a specific date or an employee being fired) is met.", c: "Spreads via email attachments.", d: "Floods a network with traffic." },
+    correctOption: "b",
+    justification: "A Logic Bomb lies dormant until a specific condition is met[cite: 99, 101, 104].",
+    category: "Malware"
+  },
+  {
+    id: 194,
+    question: "\"Oligomorphic\" malware is characterized by:",
+    options: { a: "Having no decryptor.", b: "Using a small, predefined pool of decryptors that it switches between.", c: "Rewriting its entire source code.", d: "Infecting only image files." },
+    correctOption: "b",
+    justification: "Oligomorphic malware uses a small pool of decryptors to switch between[cite: 105, 107, 110].",
+    category: "Malware"
+  },
+  {
+    id: 195,
+    question: "Which malware type exploits the \"AutoRun\" feature on USB drives to infect computers?",
+    options: { a: "Macro Virus", b: "Boot Sector Virus / USB Worm", c: "Adware", d: "Scareware" },
+    correctOption: "b",
+    justification: "USB Worms or Boot Sector viruses often exploit AutoRun features[cite: 111, 113, 116].",
+    category: "Malware"
+  },
+  {
+    id: 196,
+    question: "Malvertising is defined as:",
+    options: { a: "Advertising bad products.", b: "Using legitimate online advertising networks to distribute malware.", c: "Sending spam emails.", d: "Blocking advertisements." },
+    correctOption: "b",
+    justification: "Malvertising uses legitimate ad networks to distribute malware[cite: 117, 119, 122].",
+    category: "Malware"
+  },
+
+  // --- Lecture 03: Social Engineering ---
+  {
+    id: 197,
+    question: "Gaining unauthorized access to a secure facility by following closely behind an authorized person is called:",
+    options: { a: "Phishing", b: "Tailgating / Piggybacking", c: "Dumpster Diving", d: "Shoulder Surfing" },
+    correctOption: "b",
+    justification: "Tailgating or Piggybacking is following an authorized person into a secure facility[cite: 124, 126, 129].",
+    category: "Social Engineering"
+  },
+  {
+    id: 198,
+    question: "Which social engineering attack involves digging through trash to find discarded sensitive documents?",
+    options: { a: "Vishing", b: "Dumpster Diving", c: "Whaling", d: "Baiting" },
+    correctOption: "b",
+    justification: "Dumpster Diving involves digging through trash for sensitive documents[cite: 130, 132, 135].",
+    category: "Social Engineering"
+  },
+  {
+    id: 199,
+    question: "\"Spear Phishing\" differs from standard Phishing because:",
+    options: { a: "It uses voice calls instead of email.", b: "It targets a specific individual or organization with personalized information.", c: "It targets only wealthy individuals.", d: "It involves physical access." },
+    correctOption: "b",
+    justification: "Spear Phishing targets specific individuals or organizations with personalized info[cite: 136, 138, 141].",
+    category: "Social Engineering"
+  },
+  {
+    id: 200,
+    question: "An attack where a perpetrator leaves an infected USB drive in a parking lot, hoping a curious employee will plug it in, is called:",
+    options: { a: "Pretexting", b: "Baiting", c: "Quid Pro Quo", d: "Vishing" },
+    correctOption: "b",
+    justification: "Baiting involves leaving physical media like a USB drive for a victim to find[cite: 142, 144, 147].",
+    category: "Social Engineering"
+  },
+  {
+    id: 201,
+    question: "\"Vishing\" is a combination of:",
+    options: { a: "Video and Phishing", b: "Voice (VoIP) and Phishing", c: "Virus and Phishing", d: "Virtual and Phishing" },
+    correctOption: "b",
+    justification: "Vishing stands for Voice Phishing[cite: 148, 150, 153].",
+    category: "Social Engineering"
+  },
+  {
+    id: 202,
+    question: "Which attack involves an attacker pretending to be from IT Support and asking for your password to \"fix a problem\"?",
+    options: { a: "Tailgating", b: "Pretexting / Impersonation", c: "SQL Injection", d: "Man-in-the-Middle" },
+    correctOption: "b",
+    justification: "Pretexting or Impersonation involves creating a scenario to steal credentials[cite: 154, 156, 159].",
+    category: "Social Engineering"
+  },
+  {
+    id: 203,
+    question: "\"Typosquatting\" (or URL Hijacking) relies on:",
+    options: { a: "Users typing a website address incorrectly (e.g., goggle.com instead of google.com).", b: "Hacking the DNS server.", c: "Stealing the domain name.", d: "Using SQL injection on the URL." },
+    correctOption: "a",
+    justification: "Typosquatting relies on users making typographical errors in URLs[cite: 160, 161, 165].",
+    category: "Social Engineering"
+  },
+  {
+    id: 204,
+    question: "\"Whaling\" is a form of phishing that specifically targets:",
+    options: { a: "Low-level employees.", b: "High-value targets like CEOs or CFOs (\"The Big Fish\").", c: "System Administrators only.", d: "Random internet users." },
+    correctOption: "b",
+    justification: "Whaling targets high-value individuals like executives[cite: 166, 168, 171].",
+    category: "Social Engineering"
+  },
+
+  // --- Lecture 04: Cryptography - Classical Ciphers ---
+  {
+    id: 205,
+    question: "The \"Caesar Cipher\" is a type of:",
+    options: { a: "Transposition Cipher", b: "Mono-alphabetic Substitution Cipher", c: "Poly-alphabetic Substitution Cipher", d: "Asymmetric Cipher" },
+    correctOption: "b",
+    justification: "The Caesar Cipher is a Mono-alphabetic Substitution Cipher[cite: 173, 175, 178].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 206,
+    question: "Using a Caesar Cipher with a shift (key) of k=3, what is the ciphertext for \"ABC\"?",
+    options: { a: "XYZ", b: "DEF", c: "BCD", d: "GHI" },
+    correctOption: "b",
+    justification: "A+3=D, B+3=E, C+3=F[cite: 179, 184].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 207,
+    question: "The \"ROT-13\" cipher is unique because:",
+    options: { a: "It uses 13 keys.", b: "It is its own inverse (Applying it twice returns the original text).", c: "It shifts letters by 26 places.", d: "It is unbreakable." },
+    correctOption: "b",
+    justification: "ROT-13 is its own inverse; shifting by 13 twice returns the original text[cite: 185, 187, 190].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 208,
+    question: "In an Affine Cipher, the encryption function is E(x)=(ax+b) mod m. If a=3, b=2, and m=26 encrypt the letter 'A' (Assume A=0).",
+    options: { a: "B (1)", b: "C (2)", c: "D (3)", d: "E (4)" },
+    correctOption: "b",
+    justification: "Calculation: E(0) = (3*0 + 2) % 26 = 2. Letter 2 is 'C'[cite: 191, 197, 198].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 209,
+    question: "For an Affine Cipher to work correctly, the value 'a' must be:",
+    options: { a: "An even number.", b: "Coprime to 'm' (size of alphabet).", c: "Greater than 'm'.", d: "Equal to 'b'." },
+    correctOption: "b",
+    justification: "Value 'a' must be coprime to 'm' to ensure a modular inverse exists[cite: 199, 201, 204].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 210,
+    question: "Which cipher uses a grid to scramble the positions of the letters (e.g., writing the message in diagonals and reading row by row)?",
+    options: { a: "Caesar Cipher", b: "Rail Fence Cipher (Transposition)", c: "Vigenère Cipher", d: "Playfair Cipher" },
+    correctOption: "b",
+    justification: "The Rail Fence Cipher is a transposition cipher that scrambles positions[cite: 205, 207, 210].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 211,
+    question: "You are using a Rail Fence Cipher with a depth (rows) of 2. The plaintext is \"HELLO\". What is the ciphertext?",
+    options: { a: "HLOEL", b: "EHLLO", c: "LLEHO", d: "OLLHE" },
+    correctOption: "a",
+    justification: "Row 1: H.L.O; Row 2: .E.L.; Read: HLOEL[cite: 211, 217, 219].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 212,
+    question: "The Vigenère Cipher is an example of:",
+    options: { a: "Mono-alphabetic Substitution", b: "Poly-alphabetic Substitution", c: "Transposition", d: "Stream Cipher" },
+    correctOption: "b",
+    justification: "Vigenère is a Poly-alphabetic Substitution cipher[cite: 222, 224, 227].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 213,
+    question: "In a Vigenère cipher, if the Plaintext letter is 'A' (0) and the Key letter is 'B' (1), what is the Ciphertext?",
+    options: { a: "A", b: "B", c: "C", d: "Z" },
+    correctOption: "b",
+    justification: "0 + 1 = 1, which corresponds to B[cite: 228, 233].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 214,
+    question: "Cryptanalysis using \"Frequency Analysis\" is most effective against:",
+    options: { a: "Mono-alphabetic Substitution Ciphers (like Caesar)", b: "Poly-alphabetic Ciphers (like Vigenère with long keys)", c: "One-Time Pads", d: "AES" },
+    correctOption: "a",
+    justification: "Frequency analysis is most effective against Mono-alphabetic Substitution because it preserves language statistics[cite: 234, 235, 239].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 215,
+    question: "\"Kerckhoffs's Principle\" states that:",
+    options: { a: "The security of a system should depend on keeping the algorithm secret.", b: "The security of a system should depend only on the secrecy of the key, not the algorithm.", c: "Long keys are always secure.", d: "Transposition is better than substitution." },
+    correctOption: "b",
+    justification: "Kerckhoffs's Principle states security should depend only on the key's secrecy[cite: 240, 242, 245].",
+    category: "Cryptography - Classical"
+  },
+  {
+    id: 216,
+    question: "An encryption scheme is \"Unconditionally Secure\" if:",
+    options: { a: "It uses a 128-bit key.", b: "The ciphertext provides no information about the plaintext, regardless of computational power (e.g., One-Time Pad).", c: "It takes 100 years to crack.", d: "The algorithm is hidden." },
+    correctOption: "b",
+    justification: "Unconditional security means the ciphertext reveals nothing about the plaintext regardless of computing power[cite: 246, 248, 251].",
+    category: "Cryptography - Classical"
+  },
+
+  // --- Lecture 05: Data Encryption Standard (DES) ---
+  {
+    id: 217,
+    question: "DES is a block cipher that operates on plaintext blocks of what size?",
+    options: { a: "32 bits", b: "64 bits", c: "128 bits", d: "256 bits" },
+    correctOption: "b",
+    justification: "DES operates on 64-bit blocks[cite: 253, 255, 258].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 218,
+    question: "What is the effective key length of DES?",
+    options: { a: "56 bits", b: "64 bits", c: "48 bits", d: "128 bits" },
+    correctOption: "a",
+    justification: "The effective key length of DES is 56 bits (64 bits minus 8 parity bits)[cite: 259, 260, 264].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 219,
+    question: "How many rounds of processing (Feistel rounds) does DES perform?",
+    options: { a: "8", b: "10", c: "16", d: "32" },
+    correctOption: "c",
+    justification: "DES performs 16 Feistel rounds[cite: 265, 268, 270].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 220,
+    question: "In DES, the \"Expansion P-Box\" converts the 32-bit Right Half into how many bits before XORing with the Round Key?",
+    options: { a: "32 bits", b: "48 bits", c: "56 bits", d: "64 bits" },
+    correctOption: "b",
+    justification: "The Expansion P-Box converts 32 bits to 48 bits[cite: 271, 273, 276].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 221,
+    question: "A DES S-Box takes an input of X bits and produces an output of Y bits. What are X and Y?",
+    options: { a: "6 input, 4 output", b: "4 input, 6 output", c: "8 input, 8 output", d: "48 input, 32 output" },
+    correctOption: "a",
+    justification: "A DES S-Box takes 6 bits input and produces 4 bits output[cite: 277, 278, 282].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 222,
+    question: "If the input to a DES S-Box is 100011, how do you determine the Row and Column?",
+    options: { a: "Row = 11 (3), Column = 0001 (1)", b: "Row = 10 (2), Column = 0011 (3)", c: "Row = 01 (1), Column = 1000 (8)", d: "It is random." },
+    correctOption: "a",
+    justification: "Row is first/last bits (11=3), Column is middle bits (0001=1)[cite: 283, 284, 289].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 223,
+    question: "The \"Initial Permutation\" (IP) and \"Final Permutation\" (FP) in DES:",
+    options: { a: "Significantly increase cryptographic strength.", b: "Are inverses of each other and have no cryptographic significance.", c: "Are used to generate the keys.", d: "Compress the data." },
+    correctOption: "b",
+    justification: "IP and FP are inverses and have no cryptographic significance[cite: 291, 293, 296].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 224,
+    question: "What is the \"Feistel Structure\" used in DES?",
+    options: { a: "A structure where the entire block is encrypted at once.", b: "A structure that splits the block into two halves, processes one half, and swaps them.", c: "A structure that uses only substitution.", d: "A stream cipher structure." },
+    correctOption: "b",
+    justification: "Feistel structure splits the block, processes one half, and swaps[cite: 297, 299, 302].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 225,
+    question: "In DES key generation, the 56-bit key is split into two 28-bit halves. What operation is performed on these halves in each round?",
+    options: { a: "XOR", b: "Circular Left Shift", c: "Right Shift", d: "Substitution" },
+    correctOption: "b",
+    justification: "Circular Left Shift is performed on the key halves[cite: 303, 306, 309].",
+    category: "Cryptography - DES"
+  },
+  {
+    id: 226,
+    question: "Why is DES no longer considered secure?",
+    options: { a: "The algorithm was leaked.", b: "The key size (56 bits) is too small to withstand modern brute-force attacks.", c: "It is too slow.", d: "It has a backdoor." },
+    correctOption: "b",
+    justification: "The 56-bit key size is too small for modern brute-force attacks[cite: 310, 312, 315].",
+    category: "Cryptography - DES"
+  },
+
+  // --- Lecture 06: Advanced Encryption Standard (AES) ---
+  {
+    id: 227,
+    question: "AES was designed to replace which aging encryption standard?",
+    options: { a: "RSA", b: "DES", c: "3DES", d: "Blowfish" },
+    correctOption: "b",
+    justification: "AES was designed to replace DES[cite: 317, 319, 322].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 228,
+    question: "Unlike DES, which uses a Feistel structure, AES uses a:",
+    options: { a: "Substitution-Permutation Network (SPN)", b: "Stream Cipher structure", c: "Block Chaining Network", d: "Recursive structure" },
+    correctOption: "a",
+    justification: "AES uses a Substitution-Permutation Network (SPN)[cite: 323, 324, 328].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 229,
+    question: "What is the fixed block size for AES?",
+    options: { a: "64 bits", b: "128 bits", c: "256 bits", d: "Variable depending on key length" },
+    correctOption: "b",
+    justification: "AES has a fixed block size of 128 bits[cite: 329, 331, 334].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 230,
+    question: "If you are using AES-256, how many rounds of processing are performed?",
+    options: { a: "10", b: "12", c: "14", d: "16" },
+    correctOption: "c",
+    justification: "AES-256 uses 14 rounds[cite: 335, 338, 340].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 231,
+    question: "Which operation in the AES round involves a non-linear substitution using an S-Box?",
+    options: { a: "ShiftRows", b: "MixColumns", c: "AddRoundKey", d: "SubBytes" },
+    correctOption: "d",
+    justification: "SubBytes performs non-linear substitution using an S-Box[cite: 342, 346, 347].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 232,
+    question: "In the \"ShiftRows\" transformation, how many bytes is the first row (Row 0) shifted?",
+    options: { a: "0 bytes (It is not shifted)", b: "1 byte", c: "2 bytes", d: "3 bytes" },
+    correctOption: "a",
+    justification: "Row 0 is not shifted (0 bytes)[cite: 348, 349, 353].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 233,
+    question: "In the \"ShiftRows\" transformation, how many bytes is the last row (Row 3) shifted?",
+    options: { a: "0 bytes", b: "1 byte", c: "2 bytes", d: "3 bytes" },
+    correctOption: "d",
+    justification: "Row 3 is shifted by 3 bytes[cite: 354, 358, 359].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 234,
+    question: "Which AES transformation is omitted in the final round?",
+    options: { a: "SubBytes", b: "ShiftRows", c: "MixColumns", d: "AddRoundKey" },
+    correctOption: "c",
+    justification: "MixColumns is omitted in the final round[cite: 360, 363, 365].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 235,
+    question: "The \"AddRoundKey\" transformation combines the State with the Round Key using which bitwise operation?",
+    options: { a: "AND", b: "OR", c: "XOR", d: "NAND" },
+    correctOption: "c",
+    justification: "AddRoundKey uses XOR[cite: 366, 369, 371].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 236,
+    question: "In AES, the 128-bit block is arranged as a State Matrix of what dimensions (in bytes)?",
+    options: { a: "2x8", b: "4x4", c: "8x8", d: "1x16" },
+    correctOption: "b",
+    justification: "The State Matrix is 4x4 bytes[cite: 372, 374, 378].",
+    category: "Cryptography - AES"
+  },
+  {
+    id: 237,
+    question: "Which layer of AES provides \"Diffusion\" by mixing data across the columns?",
+    options: { a: "SubBytes", b: "ShiftRows", c: "MixColumns", d: "AddRoundKey" },
+    correctOption: "c",
+    justification: "MixColumns provides diffusion by mixing data across columns[cite: 379, 382, 384].",
+    category: "Cryptography - AES"
+  },
+
+  // --- Lecture 07: AES Key Expansion ---
+  {
+    id: 238,
+    question: "For AES-128, the input key is 16 bytes (4 words). How many words does the Expanded Key contain in total (for all 10 rounds + initial)?",
+    options: { a: "40 words", b: "44 words", c: "50 words", d: "60 words" },
+    correctOption: "b",
+    justification: "4 words/round * 11 sets = 44 words total[cite: 386, 389, 392].",
+    category: "Cryptography - AES Key Expansion"
+  },
+  {
+    id: 239,
+    question: "In the key expansion algorithm, specific processing (Function g) is applied to a word when its index is a multiple of:",
+    options: { a: "2", b: "4", c: "8", d: "10" },
+    correctOption: "b",
+    justification: "Function g is applied when the index is a multiple of 4[cite: 393, 395, 398].",
+    category: "Cryptography - AES Key Expansion"
+  },
+  {
+    id: 240,
+    question: "The \"RotWord\" function performs a cyclic left shift on a 4-byte word. If the input is [A, B, C, D], what is the output?",
+    options: { a: "[D, A, B, C]", b: "[B, C, D, A]", c: "[A, C, B, D]", d: "[D, C, B, A]" },
+    correctOption: "b",
+    justification: "RotWord shifts left, resulting in [B, C, D, A][cite: 399, 402, 405].",
+    category: "Cryptography - AES Key Expansion"
+  },
+  {
+    id: 241,
+    question: "Apply RotWord to the hex word 1A 2B 3C 4D.",
+    options: { a: "4D 1A 2B 3C", b: "2B 3C 4D 1A", c: "1A 4D 3C 2B", d: "3C 4D 1A 2B" },
+    correctOption: "b",
+    justification: "Cyclic left shift moves 1A to the end: 2B 3C 4D 1A[cite: 406, 408, 411].",
+    category: "Cryptography - AES Key Expansion"
+  },
+  {
+    id: 242,
+    question: "What is the purpose of the \"Rcon\" (Round Constant) in AES Key Expansion?",
+    options: { a: "To add symmetry to the key.", b: "To eliminate linearity and ensure each round key is different.", c: "To shift the rows of the key.", d: "To convert the key to ASCII." },
+    correctOption: "b",
+    justification: "Rcon eliminates linearity and ensures distinct round keys[cite: 412, 414, 417].",
+    category: "Cryptography - AES Key Expansion"
+  },
+  {
+    id: 243,
+    question: "If the round constant Rcon [1] is 01 00 00 00 and the output of the SubWord step is AB CD EF 12, what is the result of SubWord XOR Rcon?",
+    options: { a: "AC CD EF 12", b: "AA CD EF 12", c: "AB CD EF 13", d: "00 00 00 00" },
+    correctOption: "b",
+    justification: "AB (10101011) XOR 01 (00000001) = AA (10101010)[cite: 418, 420, 423].",
+    category: "Cryptography - AES Key Expansion"
+  },
+  {
+    id: 244,
+    question: "For words that are NOT a multiple of 4 (Wi where i ≠ 4k), the word is calculated as:",
+    options: { a: "Wi-1 XOR Wi-4", b: "Wi-1 + Wi-4", c: "SubWord(Wi-1) XOR Wi-4", d: "RotWord(Wi-1)" },
+    correctOption: "a",
+    justification: "Words not a multiple of 4 are calculated as Wi-1 XOR Wi-4[cite: 425, 426, 430].",
+    category: "Cryptography - AES Key Expansion"
+  },
+
+  // --- Lecture 08: Public Key Cryptography & RSA ---
+  {
+    id: 245,
+    question: "In a Public Key Infrastructure, which key is kept secret?",
+    options: { a: "The Public Key", b: "The Private Key", c: "Both keys", d: "Neither key" },
+    correctOption: "b",
+    justification: "The Private Key is kept secret[cite: 432, 434, 437].",
+    category: "Cryptography - RSA"
+  },
+  {
+    id: 246,
+    question: "If User A wants to send an encrypted message to User B using RSA, which key does User A use to encrypt?",
+    options: { a: "User A's Private Key", b: "User A's Public Key", c: "User B's Public Key", d: "User B's Private Key" },
+    correctOption: "c",
+    justification: "Encryption is done using the recipient's (User B's) Public Key[cite: 438, 441, 443].",
+    category: "Cryptography - RSA"
+  },
+  {
+    id: 247,
+    question: "The security of RSA depends on the computational difficulty of:",
+    options: { a: "Calculating discrete logarithms.", b: "Factoring large integers into prime numbers.", c: "Solving elliptic curve equations.", d: "Permuting blocks of text." },
+    correctOption: "b",
+    justification: "RSA security depends on the difficulty of factoring large integers into primes[cite: 444, 446, 449].",
+    category: "Cryptography - RSA"
+  },
+  {
+    id: 248,
+    question: "In RSA key generation, if you choose primes p=3 and q=11, what is the value of n?",
+    options: { a: "14", b: "33", c: "20", d: "8" },
+    correctOption: "b",
+    justification: "n = p * q = 3 * 11 = 33[cite: 450, 452, 455].",
+    category: "Cryptography - RSA"
+  },
+  {
+    id: 249,
+    question: "Using p=3 and q=11, what is the value of φ(n) (Euler's Totient)?",
+    options: { a: "33", b: "14", c: "20", d: "30" },
+    correctOption: "c",
+    justification: "φ(n) = (p-1)(q-1) = 2 * 10 = 20[cite: 456, 459, 461].",
+    category: "Cryptography - RSA"
+  },
+  {
+    id: 250,
+    question: "If φ(n)=20 and you choose the public exponent e=3, which of the following is the correct Private Key exponent d? (Hint: d * e ≡ 1 mod 20)",
+    options: { a: "3", b: "7", c: "11", d: "13" },
+    correctOption: "b",
+    justification: "3 * 7 = 21, which is 1 mod 20. So d=7[cite: 462, 465, 468].",
+    category: "Cryptography - RSA"
+  },
+  {
+    id: 251,
+    question: "If Public Key={7,33} and Plaintext M=2, what is the Ciphertext C? (Hint: C=M^e mod n)",
+    options: { a: "2", b: "8", c: "29", d: "128" },
+    correctOption: "c",
+    justification: "2^7 = 128. 128 / 33 = 3 remainder 29. C=29[cite: 469, 473, 475].",
+    category: "Cryptography - RSA"
+  },
+  {
+    id: 252,
+    question: "In RSA, the public exponent e must meet which condition regarding φ(n)?",
+    options: { a: "e must be larger than φ(n).", b: "e must be a factor of φ(n).", c: "e must be relatively prime (coprime) to φ(n).", d: "e must be even." },
+    correctOption: "c",
+    justification: "e must be coprime to φ(n)[cite: 477, 480, 482].",
+    category: "Cryptography - RSA"
+  },
+  {
+    id: 253,
+    question: "Which attack against RSA involves analyzing the time it takes for the system to decrypt a message?",
+    options: { a: "Brute Force", b: "Mathematical Attack", c: "Timing Attack (Side Channel)", d: "Chosen Ciphertext Attack" },
+    correctOption: "c",
+    justification: "Timing attacks analyze the time taken for decryption[cite: 483, 486, 488].",
+    category: "Cryptography - RSA"
+  },
+
+  // --- Lecture 09: Diffie-Hellman Key Exchange ---
+  {
+    id: 254,
+    question: "What is the primary purpose of the Diffie-Hellman algorithm?",
+    options: { a: "To encrypt large files.", b: "To securely exchange a shared secret key over an insecure channel.", c: "To digitally sign documents.", d: "To hash passwords." },
+    correctOption: "b",
+    justification: "Diffie-Hellman is used to securely exchange a shared secret key[cite: 490, 492, 495].",
+    category: "Cryptography - Diffie-Hellman"
+  },
+  {
+    id: 255,
+    question: "Diffie-Hellman relies on the difficulty of which mathematical problem?",
+    options: { a: "Integer Factorization", b: "Discrete Logarithm Problem", c: "Knapsack Problem", d: "Traveling Salesman Problem" },
+    correctOption: "b",
+    justification: "Diffie-Hellman relies on the Discrete Logarithm Problem[cite: 496, 498, 501].",
+    category: "Cryptography - Diffie-Hellman"
+  },
+  {
+    id: 256,
+    question: "In Diffie-Hellman, the public parameters known to everyone are:",
+    options: { a: "The private keys XA and XB.", b: "The shared secret K.", c: "The prime modulus q and its primitive root α.", d: "The encrypted message." },
+    correctOption: "c",
+    justification: "The prime modulus q and primitive root α are public[cite: 502, 505, 507].",
+    category: "Cryptography - Diffie-Hellman"
+  },
+  {
+    id: 257,
+    question: "User A selects private key XA=4. The public parameters are q=11 and α=2. What is User A's Public Key YA? (Hint: Y = α^X mod q)",
+    options: { a: "8", b: "6", c: "5", d: "9" },
+    correctOption: "c",
+    justification: "2^4 = 16. 16 mod 11 = 5[cite: 508, 513, 515].",
+    category: "Cryptography - Diffie-Hellman"
+  },
+  {
+    id: 258,
+    question: "User B sends Public Key YB=3. User A (with private key XA=4 and q=11) wants to calculate the Shared Secret K. What is K? (Hint: K = YB^XA mod q)",
+    options: { a: "9", b: "4", c: "1", d: "5" },
+    correctOption: "b",
+    justification: "3^4 = 81. 81 / 11 = 7 remainder 4. K=4[cite: 517, 521, 524].",
+    category: "Cryptography - Diffie-Hellman"
+  },
+  {
+    id: 259,
+    question: "What is the major security weakness of the basic Diffie-Hellman protocol?",
+    options: { a: "It cannot generate long keys.", b: "It is vulnerable to Man-in-the-Middle (MitM) attacks because it lacks authentication.", c: "It requires too much processing power.", d: "It relies on small prime numbers." },
+    correctOption: "b",
+    justification: "Basic Diffie-Hellman lacks authentication, making it vulnerable to MitM[cite: 526, 528, 531].",
+    category: "Cryptography - Diffie-Hellman"
+  },
+  {
+    id: 260,
+    question: "If q is a prime number, a \"primitive root\" α must generate:",
+    options: { a: "Only even numbers.", b: "All integers from 1 to q-1 when raised to powers modulo q.", c: "Only prime numbers.", d: "Random numbers." },
+    correctOption: "b",
+    justification: "A primitive root generates all integers from 1 to q-1[cite: 532, 534, 537].",
+    category: "Cryptography - Diffie-Hellman"
+  },
+
+  // --- Lecture 10: Cryptographic Systems Standards ---
+  {
+    id: 261,
+    question: "Which standard is widely used to secure web traffic (HTTPS)?",
+    options: { a: "IPsec", b: "SSL/TLS", c: "Kerberos", d: "WPA2" },
+    correctOption: "b",
+    justification: "SSL/TLS is the standard for securing web traffic (HTTPS)[cite: 539, 541, 544].",
+    category: "Cryptographic Standards"
+  },
+  {
+    id: 262,
+    question: "In a cryptographic system handshake, what happens during \"Stage 1\"?",
+    options: { a: "Authentication of the user.", b: "Negotiation of security methods and cipher suites.", c: "Key exchange.", d: "Data transmission." },
+    correctOption: "b",
+    justification: "Stage 1 involves negotiating security methods and cipher suites[cite: 545, 547, 550].",
+    category: "Cryptographic Standards"
+  },
+  {
+    id: 263,
+    question: "A \"Cipher Suite\" typically includes algorithms for all the following EXCEPT:",
+    options: { a: "Key Exchange (e.g., RSA/DH)", b: "Message Integrity (e.g., SHA)", c: "Compression (e.g., ZIP)", d: "Encryption (e.g., AES)" },
+    correctOption: "c",
+    justification: "Cipher suites do not typically include compression algorithms[cite: 551, 554, 556].",
+    category: "Cryptographic Standards"
+  },
+  {
+    id: 264,
+    question: "What is the threat posed by Quantum Computing to current cryptography?",
+    options: { a: "It can break symmetric keys (AES) instantly.", b: "It can solve the factoring and discrete log problems efficiently, breaking RSA and Diffie-Hellman.", c: "It can reverse hash functions.", d: "It prevents digital signatures." },
+    correctOption: "b",
+    justification: "Quantum computing can efficiently solve factoring and discrete log problems, threatening RSA/DH[cite: 557, 559, 562].",
+    category: "Cryptographic Standards"
+  },
+  {
+    id: 265,
+    question: "Quantum Key Distribution (QKD) relies on:",
+    options: { a: "The difficulty of factoring.", b: "The behavior of fundamental particles (physics) rather than mathematics.", c: "Extremely long passwords.", d: "Blockchain technology." },
+    correctOption: "b",
+    justification: "QKD relies on physics (behavior of particles) rather than math[cite: 563, 565, 568].",
+    category: "Cryptographic Standards"
+  },
+  {
+    id: 266,
+    question: "IPsec operates at which layer of the OSI model?",
+    options: { a: "Application Layer (Layer 7)", b: "Transport Layer (Layer 4)", c: "Network Layer (Layer 3)", d: "Data Link Layer (Layer 2)" },
+    correctOption: "c",
+    justification: "IPsec operates at the Network Layer (Layer 3)[cite: 569, 572, 574].",
+    category: "Cryptographic Standards"
+  },
+
+  // --- Lecture 11: Hash Functions & Digital Signatures ---
+  {
+    id: 267,
+    question: "Which property of a hash function ensures that it is computationally infeasible to find any two different messages x and y such that H(x)=H(y)?",
+    options: { a: "Pre-image resistance", b: "Second pre-image resistance", c: "Collision resistance", d: "Reversibility" },
+    correctOption: "c",
+    justification: "Collision resistance ensures it's hard to find two messages with the same hash[cite: 576, 579, 581].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 268,
+    question: "The \"Avalanche Effect\" in hashing means:",
+    options: { a: "The hash function crashes the system.", b: "A small change in the input (1 bit) results in a massive, unpredictable change in the output hash.", c: "The output is always smaller than the input.", d: "The function is slow to compute." },
+    correctOption: "b",
+    justification: "The Avalanche Effect means a small input change causes a large output change[cite: 582, 584, 587].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 269,
+    question: "To create a Digital Signature, the sender encrypts the message hash with:",
+    options: { a: "The Sender's Public Key", b: "The Sender's Private Key", c: "The Receiver's Public Key", d: "The Shared Symmetric Key" },
+    correctOption: "b",
+    justification: "Digital Signatures are created by encrypting the hash with the Sender's Private Key[cite: 588, 590, 593].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 270,
+    question: "Digital Signatures provide all the following security services EXCEPT:",
+    options: { a: "Authentication", b: "Data Integrity", c: "Non-Repudiation", d: "Confidentiality" },
+    correctOption: "d",
+    justification: "Digital Signatures do not provide confidentiality; the message itself is often visible[cite: 594, 598, 599].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 271,
+    question: "What is an HMAC?",
+    options: { a: "A hash function that does not use keys.", b: "A Message Authentication Code constructed using a cryptographic hash function and a secret key.", c: "A digital signature algorithm.", d: "An encryption standard." },
+    correctOption: "b",
+    justification: "HMAC is a Message Authentication Code using a hash and a secret key[cite: 600, 602, 605].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 272,
+    question: "If User A sends a message to User B with a Digital Signature, how does User B verify it?",
+    options: { a: "B decrypts the signature with A's Public Key and compares the hash.", b: "B decrypts the signature with B's Private Key.", c: "B asks A to send the password.", d: "B encrypts the message with A's Public Key." },
+    correctOption: "a",
+    justification: "Verification involves decrypting the signature with the sender's (A's) Public Key[cite: 606, 607, 611].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 273,
+    question: "Which SHA version produces a 160-bit hash value?",
+    options: { a: "SHA-1", b: "SHA-256", c: "SHA-512", d: "MD5" },
+    correctOption: "a",
+    justification: "SHA-1 produces a 160-bit hash[cite: 612, 613, 617].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 274,
+    question: "Why is MD5 no longer recommended?",
+    options: { a: "It is too slow.", b: "It has been found vulnerable to collision attacks.", c: "The output is too large.", d: "It is proprietary." },
+    correctOption: "b",
+    justification: "MD5 is vulnerable to collision attacks[cite: 618, 620, 623].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 275,
+    question: "The input to a hash function can be of variable length, but the output is always:",
+    options: { a: "Variable length.", b: "Fixed length.", c: "Twice the input length.", d: "Zero." },
+    correctOption: "b",
+    justification: "Hash functions produce a fixed-length output[cite: 624, 626, 629].",
+    category: "Hash Functions & Digital Signatures"
+  },
+  {
+    id: 276,
+    question: "What is \"Second Pre-image Resistance\"?",
+    options: { a: "Given a hash h, it is hard to find x.", b: "Given an input x, it is hard to find a different input y such that H(y)=H(x).", c: "It is hard to find any pair (x,y) that collide.", d: "It is hard to decrypt the hash." },
+    correctOption: "b",
+    justification: "Second Pre-image Resistance means it is hard to find a different input y with the same hash as x[cite: 630, 632, 635].",
+    category: "Hash Functions & Digital Signatures"
+  },
+
+  // --- Lecture 12: SQL Injection ---
+  {
+    id: 277,
+    question: "SQL Injection is primarily caused by which of the following?",
+    options: { a: "Using weak passwords for database accounts", b: "The blurring of the boundary between developer code and user data", c: "Failing to encrypt the database", d: "Allowing users to upload files to the server" },
+    correctOption: "b",
+    justification: "SQL Injection is caused by the blurring of the boundary between code and user data[cite: 637, 638].",
+    category: "SQL Injection"
+  },
+  {
+    id: 278,
+    question: "Which of the following is considered the most common attack vector, accounting for over 50% of web application attacks?",
+    options: { a: "Cross-Site Scripting (XSS)", b: "Denial of Service (DoS)", c: "SQL Injection (SQLI)", d: "Phishing" },
+    correctOption: "c",
+    justification: "SQL Injection is the most common attack vector mentioned[cite: 639, 640].",
+    category: "SQL Injection"
+  },
+  {
+    id: 279,
+    question: "In the classic SQL injection payload frank' OR 1=1 --, what is the purpose of --?",
+    options: { a: "To execute the query immediately", b: "To check if the password is correct", c: "To comment out the rest of the query so the password check is ignored", d: "To join two tables together" },
+    correctOption: "c",
+    justification: "The '--' comments out the rest of the query[cite: 641, 642].",
+    category: "SQL Injection"
+  },
+  {
+    id: 280,
+    question: "Consider the query: SELECT * FROM Users WHERE name = '$user' AND password = '$pass';. If an attacker enters admin' -- into the user field, what does the database execute?",
+    options: { a: "SELECT * FROM Users WHERE name = 'admin' --' AND password = '$pass';", b: "SELECT * FROM Users WHERE name = 'admin';", c: "SELECT * FROM Users WHERE name = 'admin' AND password = '';", d: "It generates a syntax error." },
+    correctOption: "a",
+    justification: "It effectively executes option B because the rest is commented out, but A is the literal string resulting from injection[cite: 643, 645, 647].",
+    category: "SQL Injection"
+  },
+  {
+    id: 281,
+    question: "Which SQL injection technique involves using the UNION operator?",
+    options: { a: "Blind SQL Injection", b: "Retrieving data from a different table by combining results", c: "Deleting the database schema", d: "Bypassing the login screen using boolean logic" },
+    correctOption: "b",
+    justification: "UNION-based injection retrieves data from different tables by combining results[cite: 648, 649].",
+    category: "SQL Injection"
+  },
+  {
+    id: 282,
+    question: "When performing a UNION-based SQL injection, why might an attacker use ORDER BY 1, ORDER BY 2, etc.?",
+    options: { a: "To sort the passwords alphabetically", b: "To find the version of the SQL database", c: "To determine the number of columns in the original query", d: "To delete the logs" },
+    correctOption: "c",
+    justification: "ORDER BY is used to determine the number of columns in the original query[cite: 650, 651].",
+    category: "SQL Injection"
+  },
+  {
+    id: 283,
+    question: "What is \"Blind\" SQL Injection?",
+    options: { a: "The attacker steals data without seeing the database schema.", b: "The attacker cannot see the data directly but infers it from the server's response behavior.", c: "The attacker deletes the data so no one can see it.", d: "The attack happens automatically without human intervention." },
+    correctOption: "b",
+    justification: "Blind SQL Injection involves inferring data from server behavior without direct output[cite: 652, 653, 655].",
+    category: "SQL Injection"
+  },
+  {
+    id: 284,
+    question: "Which of the following is a method used in Blind SQL Injection?",
+    options: { a: "Measuring the time delay of a response (Time-based)", b: "Using UNION SELECT to dump the table to the screen", c: "Viewing the error message directly to see the table name", d: "Using Google Dorks to find the page" },
+    correctOption: "a",
+    justification: "Time-based measuring is a method for Blind SQL Injection[cite: 656, 657].",
+    category: "SQL Injection"
+  },
+  {
+    id: 285,
+    question: "In a Time-Based Blind SQL injection, what payload would confirm a vulnerability if the server pauses?",
+    options: { a: "OR 1=1", b: "WAITFOR DELAY '0:0:30'", c: "DROP TABLE Users", d: "SELECT * FROM Users" },
+    correctOption: "b",
+    justification: "WAITFOR DELAY causes the server to pause, confirming the vulnerability[cite: 658, 659].",
+    category: "SQL Injection"
+  },
+  {
+    id: 286,
+    question: "What is \"Second Order\" SQL Injection?",
+    options: { a: "An injection that happens in the second database of a cluster.", b: "Malicious input is stored in the database first, then executed later in a different query.", c: "An attack that requires two different users to execute.", d: "Using two apostrophes instead of one." },
+    correctOption: "b",
+    justification: "Second Order SQL Injection occurs when stored malicious input is executed later[cite: 660, 661, 663].",
+    category: "SQL Injection"
+  },
+  {
+    id: 287,
+    question: "Which of the following is the most effective defense against SQL Injection?",
+    options: { a: "Blacklisting characters like ' and --", b: "Using Prepared Statements (Parameterized Queries)", c: "Encrypting the table names", d: "Running the database on a separate server" },
+    correctOption: "b",
+    justification: "Prepared Statements are the most effective defense against SQL Injection[cite: 664, 665].",
+    category: "SQL Injection"
+  },
+  {
+    id: 288,
+    question: "Why is \"Blacklisting\" (removing bad characters) generally considered a weak defense?",
+    options: { a: "It slows down the database significantly.", b: "It prevents legitimate users like \"Peter O'Connor\" from entering their names.", c: "Attackers can bypass it using encoding (like Hex) to hide characters.", d: "Both B and C." },
+    correctOption: "d",
+    justification: "Blacklisting is weak because it blocks legitimate input and can be bypassed via encoding[cite: 666, 668].",
+    category: "SQL Injection"
+  },
+  {
+    id: 289,
+    question: "What is the key advantage of using Prepared Statements?",
+    options: { a: "They encrypt the data automatically.", b: "They decouple the code from the data, ensuring user input is treated strictly as data.", c: "They allow the database to execute queries faster by skipping the compilation phase.", d: "They work even if the database is offline." },
+    correctOption: "b",
+    justification: "Prepared Statements decouple code from data, treating input strictly as data[cite: 669, 670, 672].",
+    category: "SQL Injection"
+  },
+  {
+    id: 290,
+    question: "What does the Google Dork inurl:index.php?id= typically look for?",
+    options: { a: "Admin login pages", b: "Websites that are likely using a database query based on an ID parameter", c: "Encrypted HTTPS websites", d: "Websites running on IIS servers" },
+    correctOption: "b",
+    justification: "This dork looks for sites using ID parameters in queries, potentially vulnerable to SQLi[cite: 673, 674].",
+    category: "SQL Injection"
+  },
+  {
+    id: 291,
+    question: "If a website is vulnerable to SQL injection, adding a single apostrophe (') to the URL usually results in:",
+    options: { a: "A redirect to the homepage", b: "A successful login", c: "A SQL syntax error message", d: "The server shutting down" },
+    correctOption: "c",
+    justification: "Adding an apostrophe often causes a SQL syntax error[cite: 675].",
+    category: "SQL Injection"
+  },
+
+  // --- Lecture 13: HTTP(S) ---
+  {
+    id: 292,
+    question: "Which protocol is considered \"stateless\"?",
+    options: { a: "FTP", b: "HTTP", c: "SSH", d: "TCP" },
+    correctOption: "b",
+    justification: "HTTP is a stateless protocol[cite: 677].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 293,
+    question: "Because HTTP is stateless, what mechanism is commonly used to maintain a user's session (e.g., keeping them logged in)?",
+    options: { a: "Keep-Alive headers", b: "Cookies", c: "POST requests", d: "The Referer header" },
+    correctOption: "b",
+    justification: "Cookies are commonly used to maintain user sessions[cite: 677, 678].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 294,
+    question: "Which HTTP method places parameters directly into the URL?",
+    options: { a: "POST", b: "HEAD", c: "GET", d: "CONNECT" },
+    correctOption: "c",
+    justification: "GET requests place parameters directly in the URL[cite: 679].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 295,
+    question: "Why should sensitive data (like passwords) never be sent via a GET request?",
+    options: { a: "GET requests are encrypted by default.", b: "GET requests remain in the browser history and logs.", c: "GET requests are slower than POST.", d: "GET requests are only for images." },
+    correctOption: "b",
+    justification: "GET requests (and parameters) remain in browser history and logs[cite: 680, 681].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 296,
+    question: "Which header tells the server to keep the TCP connection open for multiple requests?",
+    options: { a: "Connection: close", b: "Connection: keep-alive", c: "Accept: keep-alive", d: "Host: keep-alive" },
+    correctOption: "b",
+    justification: "'Connection: keep-alive' keeps the TCP connection open[cite: 683, 684].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 297,
+    question: "In an HTTP response, what does the Content-Type header specify?",
+    options: { a: "The size of the file being downloaded", b: "The type of content in the message body (e.g., text/html)", c: "The encoding used (e.g., gzip)", d: "The browser version of the client" },
+    correctOption: "b",
+    justification: "Content-Type specifies the media type of the message body[cite: 685, 686].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 298,
+    question: "What is the primary function of HTTPS?",
+    options: { a: "To compress data for faster transmission", b: "To encrypt communication between client and server using SSL/TLS", c: "To allow unlimited data transfer", d: "To prevent SQL injection attacks" },
+    correctOption: "b",
+    justification: "HTTPS encrypts communication using SSL/TLS[cite: 687].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 299,
+    question: "What is an \"SSL Strip\" attack?",
+    options: { a: "An attack that deletes the SSL certificate from the server.", b: "A Man-in-the-Middle attack that downgrades a user's connection from HTTPS to HTTP.", c: "An attack that strips the headers from an HTTP request.", d: "A Denial of Service attack on port 443." },
+    correctOption: "b",
+    justification: "SSL Strip is a MITM attack downgrading HTTPS to HTTP[cite: 688, 689].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 300,
+    question: "How does an attacker typically execute an SSL Strip attack?",
+    options: { a: "By guessing the server's password", b: "By rewriting HTTPS URLs in the response to HTTP", c: "By turning off the victim's WiFi", d: "By injecting SQL into the login form" },
+    correctOption: "b",
+    justification: "Attackers rewrite HTTPS URLs to HTTP[cite: 692, 693].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 301,
+    question: "What is \"Mixed Content\"?",
+    options: { a: "When a website uses both English and Spanish.", b: "When a secure HTTPS page loads insecure resources (images/scripts) over HTTP.", c: "When a POST request is sent to a GET-only server.", d: "When a website runs on both Linux and Windows." },
+    correctOption: "b",
+    justification: "Mixed Content is when an HTTPS page loads insecure HTTP resources[cite: 694, 695].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 302,
+    question: "Which of the following is a defense against SSL Strip and Downgrade attacks?",
+    options: { a: "HTTP Strict Transport Security (HSTS)", b: "Using shorter passwords", c: "Disabling Cookies", d: "Using HTTP/1.1 instead of HTTP/2" },
+    correctOption: "a",
+    justification: "HSTS is a defense against SSL Strip and Downgrade attacks[cite: 698, 699].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 303,
+    question: "What is a \"Downgrade Attack\"?",
+    options: { a: "Forcing a server to restart in safe mode.", b: "Forcing a protocol to abandon a high-quality mode (encrypted) for a lower-quality mode (cleartext).", c: "Downloading a file that contains a virus.", d: "Reducing the bandwidth of the victim." },
+    correctOption: "b",
+    justification: "Downgrade attacks force a protocol to use lower-quality modes[cite: 700, 701].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 304,
+    question: "What does the Referer header indicate?",
+    options: { a: "The IP address of the user.", b: "The URL of the page the user came from before the current request.", c: "The version of the browser being used.", d: "The type of content the user accepts." },
+    correctOption: "b",
+    justification: "Referer indicates the previous page URL[cite: 703, 704].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 305,
+    question: "Which HTTP method should be used for actions that have side-effects (like uploading data or making a purchase)?",
+    options: { a: "GET", b: "POST", c: "HEAD", d: "TRACE" },
+    correctOption: "b",
+    justification: "POST should be used for actions with side-effects[cite: 706, 707].",
+    category: "HTTP(S) Security"
+  },
+  {
+    id: 306,
+    question: "In the context of web security, what does the \"Host\" header specify?",
+    options: { a: "The IP address of the client", b: "The hostname that appeared in the full URL being requested", c: "The operating system of the server", d: "The admin email of the website" },
+    correctOption: "b",
+    justification: "Host header specifies the hostname from the requested URL[cite: 708, 709].",
+    category: "HTTP(S) Security"
+  },
+
+  // --- Mixed / Application Scenarios ---
+  {
+    id: 307,
+    question: "An attacker notices the URL ...id=50. They change it to ...id=50 AND 1=2. The page loads but is missing the item description. What does this likely indicate?",
+    options: { a: "The site is immune to SQL injection.", b: "The site is vulnerable to Blind SQL Injection.", c: "The database is down.", d: "The attacker needs to use a POST request." },
+    correctOption: "b",
+    justification: "Changes in page content based on logic injection indicate Blind SQL Injection[cite: 711, 712, 714].",
+    category: "Application Security Scenarios"
+  },
+  {
+    id: 308,
+    question: "A user is on a coffee shop WiFi. They type http://bank.com. The browser loads the bank's page, but the lock icon is missing. This user is likely a victim of:",
+    options: { a: "SQL Injection", b: "Cross-Site Scripting", c: "SSL Strip", d: "A DDoS attack" },
+    correctOption: "c",
+    justification: "Missing lock icon on a bank site via HTTP suggests SSL Strip[cite: 716, 718].",
+    category: "Application Security Scenarios"
+  },
+  {
+    id: 309,
+    question: "Which of the following commands would an attacker typically inject to verify a Time-Based Blind SQLi vulnerability on a Microsoft SQL Server?",
+    options: { a: "SLEEP(10)", b: "WAITFOR DELAY '0:0:10'", c: "PAUSE 10", d: "PING -n 10 localhost" },
+    correctOption: "b",
+    justification: "WAITFOR DELAY is the command for time delays in MS SQL Server[cite: 719, 720].",
+    category: "Application Security Scenarios"
+  },
+  {
+    id: 310,
+    question: "In a prepared statement, what character is typically used as a placeholder for user data?",
+    options: { a: "*", b: "?", c: "%", d: "$" },
+    correctOption: "b",
+    justification: "'?' is typically used as the placeholder in prepared statements[cite: 721, 722].",
+    category: "Application Security Scenarios"
+  },
+  {
+    id: 311,
+    question: "If you visit https://secure-site.com but the browser warns you that parts of the page are not secure (e.g., an image loaded via http://), this is an example of:",
+    options: { a: "Downgrade Attack", b: "Mixed Content", c: "Certificate Pinning", d: "Cross-Site Request Forgery" },
+    correctOption: "b",
+    justification: "This warning describes Mixed Content[cite: 723].",
+    category: "Application Security Scenarios"
+  },
+
+  // --- Lecture 14: Cookies & Session Management ---
+  {
+    id: 312,
+    question: "Why are cookies necessary for modern web applications?",
+    options: { a: "Because HTTP is a stateful protocol that stores too much data.", b: "Because HTTP is a stateless protocol and cannot remember users between requests.", c: "To encrypt the connection between client and server.", d: "To prevent SQL injection attacks." },
+    correctOption: "b",
+    justification: "Cookies are needed because HTTP is stateless[cite: 725, 726].",
+    category: "Session Management"
+  },
+  {
+    id: 313,
+    question: "Which of the following is a disadvantage of using \"Hidden Form Fields\" for session management instead of cookies?",
+    options: { a: "They are not supported by older browsers.", b: "They require the session ID to be manually injected into every single page link and form.", c: "They encrypt the data, making it too slow.", d: "They persist even after the browser is closed." },
+    correctOption: "b",
+    justification: "Hidden fields require manual injection into every link/form[cite: 728, 729].",
+    category: "Session Management"
+  },
+  {
+    id: 314,
+    question: "If a cookie is set with the attribute HttpOnly, what is the primary security benefit?",
+    options: { a: "The cookie is encrypted during transmission.", b: "The cookie cannot be accessed by client-side scripts (JavaScript), preventing XSS theft.", c: "The cookie is only sent to the original server.", d: "The cookie expires immediately when the tab is closed." },
+    correctOption: "b",
+    justification: "HttpOnly prevents client-side scripts (JS) from accessing the cookie[cite: 731, 732].",
+    category: "Session Management"
+  },
+  {
+    id: 315,
+    question: "A developer wants to ensure a session cookie is NEVER sent over an unencrypted (HTTP) connection. Which flag must be set?",
+    options: { a: "HttpOnly", b: "SameSite", c: "Secure", d: "Private" },
+    correctOption: "c",
+    justification: "The Secure flag ensures transmission only over encrypted connections[cite: 735, 736].",
+    category: "Session Management"
+  },
+  {
+    id: 316,
+    question: "Which of the following best describes a \"Third-Party Cookie\"?",
+    options: { a: "A cookie set by the website you are currently visiting.", b: "A cookie set by a domain different from the one in the address bar (e.g., an ad server).", c: "A cookie that requires three passwords to access.", d: "A cookie used solely for banking transactions." },
+    correctOption: "b",
+    justification: "Third-party cookies are set by domains different from the address bar[cite: 737, 739].",
+    category: "Session Management"
+  },
+  {
+    id: 317,
+    question: "What is \"Session Hijacking\"?",
+    options: { a: "An attacker crashes the server to stop the session.", b: "An attacker steals a valid session cookie to impersonate a legitimate user.", c: "An attacker creates a new account with fake details.", d: "The browser deletes the session key automatically." },
+    correctOption: "b",
+    justification: "Session Hijacking is stealing a valid session cookie to impersonate a user[cite: 741, 742].",
+    category: "Session Management"
+  },
+  {
+    id: 318,
+    question: "In the Twitter (2013) case study, what was the critical flaw in their session management?",
+    options: { a: "They used HTTP instead of HTTPS.", b: "The auth_token cookie did not change after login and didn't expire immediately upon logout.", c: "They didn't use cookies at all.", d: "They allowed duplicate usernames." },
+    correctOption: "b",
+    justification: "The flaw was that the auth_token didn't change after login/logout[cite: 744, 745].",
+    category: "Session Management"
+  },
+  {
+    id: 319,
+    question: "Which attribute limits the scope of a cookie to a specific folder on the server?",
+    options: { a: "Domain", b: "Secure", c: "Path", d: "Expires" },
+    correctOption: "c",
+    justification: "The Path attribute limits cookie scope to a specific folder[cite: 747, 748].",
+    category: "Session Management"
+  },
+  {
+    id: 320,
+    question: "Even if a user blocks cookies, advertisers can still track them using:",
+    options: { a: "SQL Injection", b: "Browser Fingerprinting (screen resolution, fonts, battery level)", c: "DNS Spoofing", d: "SSL Stripping" },
+    correctOption: "b",
+    justification: "Browser Fingerprinting tracks users without cookies[cite: 749, 750].",
+    category: "Session Management"
+  },
+  {
+    id: 321,
+    question: "What is the standard defense against session prediction attacks?",
+    options: { a: "Making session IDs short and easy to remember.", b: "Using sequential session IDs (1001, 1002, 1003).", c: "Generating long, random, and unpredictable session IDs.", d: "Using the user's username as the session ID." },
+    correctOption: "c",
+    justification: "Using long, random, and unpredictable session IDs prevents prediction[cite: 751, 752].",
+    category: "Session Management"
+  },
+
+  // --- Lecture 15: Cross-Site Request Forgery (CSRF) ---
+  {
+    id: 322,
+    question: "Which of the following best defines a CSRF attack?",
+    options: { a: "Injecting a script to steal user cookies.", b: "Forcing an authenticated user's browser to send an unwanted request to a vulnerable application.", c: "Overloading the server with traffic (DDoS).", d: "Stealing the database password." },
+    correctOption: "b",
+    justification: "CSRF forces an authenticated browser to send unwanted requests[cite: 755, 756].",
+    category: "CSRF"
+  },
+  {
+    id: 323,
+    question: "Why does CSRF work?",
+    options: { a: "Because browsers automatically include session cookies with every request to a domain, even if initiated by a third party.", b: "Because the attacker knows the user's password.", c: "Because the web server is offline.", d: "Because the victim has disabled JavaScript." },
+    correctOption: "a",
+    justification: "CSRF works because browsers automatically include session cookies[cite: 758, 759].",
+    category: "CSRF"
+  },
+  {
+    id: 324,
+    question: "Which of the following HTML tags can be used to trigger a GET-based CSRF attack?",
+    options: { a: "<img src=\"...\">", b: "<table border=\"...\">", c: "<h1 class=\"...\">", d: "<title>..." },
+    correctOption: "a",
+    justification: "Image tags with src attributes can trigger GET requests[cite: 761, 762].",
+    category: "CSRF"
+  },
+  {
+    id: 325,
+    question: "The most effective defense against CSRF is:",
+    options: { a: "Using SSL/HTTPS.", b: "The Synchronizer Token Pattern (Anti-CSRF Tokens).", c: "Hiding the URL of the admin page.", d: "Using a firewall." },
+    correctOption: "b",
+    justification: "The Synchronizer Token Pattern is the most effective defense[cite: 763, 764].",
+    category: "CSRF"
+  },
+  {
+    id: 326,
+    question: "How do \"SameSite\" cookies help prevent CSRF?",
+    options: { a: "They encrypt the cookie value.", b: "They instruct the browser not to send the cookie if the request comes from a third-party site.", c: "They ensure the cookie is only valid for 5 minutes.", d: "They allow the cookie to be shared with all subdomains." },
+    correctOption: "b",
+    justification: "SameSite cookies prevent sending cookies on third-party requests[cite: 765, 766].",
+    category: "CSRF"
+  },
+  {
+    id: 327,
+    question: "What is \"Drive-By Pharming\"?",
+    options: { a: "An attack where a script changes a home router's DNS settings by guessing default passwords.", b: "Driving past an office to steal Wi-Fi.", c: "Installing malware on a pharmacy website.", d: "Using a USB drive to steal data." },
+    correctOption: "a",
+    justification: "Drive-By Pharming changes router DNS settings via default passwords[cite: 769, 770].",
+    category: "CSRF"
+  },
+  {
+    id: 328,
+    question: "What is the key difference between XSS and CSRF?",
+    options: { a: "XSS targets the server; CSRF targets the database.", b: "XSS exploits the user's trust in the site; CSRF exploits the site's trust in the user's browser.", c: "XSS cannot steal data; CSRF can.", d: "There is no difference." },
+    correctOption: "b",
+    justification: "XSS exploits user trust in site; CSRF exploits site trust in user browser[cite: 772, 773].",
+    category: "CSRF"
+  },
+
+  // --- Lecture 16: Cross-Site Scripting (XSS) ---
+  {
+    id: 329,
+    question: "Which type of XSS involves the malicious script being permanently saved to the database (e.g., in a comment section)?",
+    options: { a: "Reflected XSS", b: "Stored (Persistent) XSS", c: "DOM-Based XSS", d: "Ephemeral XSS" },
+    correctOption: "b",
+    justification: "Stored XSS involves saving the script permanently to the database[cite: 776, 777].",
+    category: "XSS"
+  },
+  {
+    id: 330,
+    question: "How does \"Reflected XSS\" typically work?",
+    options: { a: "The script is stored on the server's hard drive.", b: "The script is embedded in a URL (e.g., search query) and bounces off the server to the victim.", c: "The attack happens entirely in the browser's cache.", d: "It requires the attacker to have physical access to the server." },
+    correctOption: "b",
+    justification: "Reflected XSS embeds the script in a URL which bounces off the server[cite: 778, 779].",
+    category: "XSS"
+  },
+  {
+    id: 331,
+    question: "Which of the following is a capability of a malicious JavaScript injected via XSS?",
+    options: { a: "It can format the hard drive of the server.", b: "It can read the document.cookie and send it to the attacker.", c: "It can shut down the power grid.", d: "It can overheat the CPU." },
+    correctOption: "b",
+    justification: "Injected JS can read document.cookie and send it to the attacker[cite: 782, 784].",
+    category: "XSS"
+  },
+  {
+    id: 332,
+    question: "The \"Samy Worm\" on MySpace was an example of:",
+    options: { a: "SQL Injection.", b: "Stored XSS.", c: "CSRF.", d: "A Virus." },
+    correctOption: "b",
+    justification: "The Samy Worm was a Stored XSS attack[cite: 786, 787].",
+    category: "XSS"
+  },
+  {
+    id: 333,
+    question: "What is the \"Same Origin Policy\" (SOP)?",
+    options: { a: "A rule that says scripts from one domain cannot access resources from another domain.", b: "A rule that forces all websites to be hosted in the same country.", c: "A rule that users must use the same password for all sites.", d: "A rule that prevents cookies from being deleted." },
+    correctOption: "a",
+    justification: "SOP prevents scripts from one domain accessing resources from another[cite: 788, 789].",
+    category: "XSS"
+  },
+  {
+    id: 334,
+    question: "Which header allows administrators to whitelist trusted domains for scripts, effectively neutralizing XSS?",
+    options: { a: "Strict-Transport-Security", b: "Content-Security-Policy (CSP)", c: "X-Frame-Options", d: "Access-Control-Allow-Origin" },
+    correctOption: "b",
+    justification: "CSP allows whitelisting of trusted domains[cite: 792, 793].",
+    category: "XSS"
+  },
+  {
+    id: 335,
+    question: "The best way to prevent XSS in user inputs is to:",
+    options: { a: "Use Blacklisting (removing words like \"script\").", b: "Use Output Encoding (converting < to &lt;).", c: "Trust the user input.", d: "Disable HTML entirely." },
+    correctOption: "b",
+    justification: "Output Encoding is the best way to prevent XSS in user inputs[cite: 794, 795].",
+    category: "XSS"
+  },
+
+  // --- Lecture 17: Access Control & Biometrics ---
+  {
+    id: 336,
+    question: "Which pillar of access control is responsible for proving that a user is who they claim to be?",
+    options: { a: "Identification", b: "Authentication", c: "Authorization", d: "Auditing" },
+    correctOption: "b",
+    justification: "Authentication is proving the user is who they claim to be[cite: 797, 798].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 337,
+    question: "\"Principle of Least Privilege\" means:",
+    options: { a: "Giving all users administrator access.", b: "Giving users only the permissions strictly necessary to do their job.", c: "Giving users access to files only on weekends.", d: "Authenticating users with the shortest password possible." },
+    correctOption: "b",
+    justification: "Least Privilege means giving only strictly necessary permissions[cite: 799, 800].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 338,
+    question: "A system where the central authority sets strict access rules that users cannot change (e.g., Top Secret clearance) is called:",
+    options: { a: "Discretionary Access Control (DAC)", b: "Role-Based Access Control (RBAC)", c: "Mandatory Access Control (MAC)", d: "Open Access Control" },
+    correctOption: "c",
+    justification: "MAC involves central authority setting strict rules users cannot change[cite: 802].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 339,
+    question: "Which of the following is an example of \"Authentication by Characteristic\" (What you are)?",
+    options: { a: "Password", b: "Smart Card", c: "Fingerprint", d: "Typing Rhythm" },
+    correctOption: "c",
+    justification: "Fingerprints are an example of Authentication by Characteristic (What you are)[cite: 803, 804].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 340,
+    question: "In biometrics, the \"False Acceptance Rate\" (FAR) refers to:",
+    options: { a: "The percentage of legitimate users who are blocked.", b: "The percentage of impostors who are incorrectly matched and allowed access.", c: "The time it takes to scan a finger.", d: "The cost of the scanner." },
+    correctOption: "b",
+    justification: "FAR is the percentage of impostors incorrectly matched and allowed access[cite: 805, 806].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 341,
+    question: "Which biometric method has the lowest False Acceptance Rate (highest security) but is very expensive?",
+    options: { a: "Face Recognition", b: "Voice Recognition", c: "Iris Recognition", d: "Hand Geometry" },
+    correctOption: "c",
+    justification: "Iris Recognition offers the lowest FAR but is expensive[cite: 808, 809].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 342,
+    question: "A biometric system has a False Acceptance Rate (FAR) of 0.1% (or 1/1000). If you use this system for VERIFICATION (1-to-1 match), what is the probability of a false acceptance?",
+    options: { a: "0.1% (0.001)", b: "10%", c: "50%", d: "1%" },
+    correctOption: "a",
+    justification: "In verification (1-to-1), the risk is exactly the FAR (0.1%)[cite: 810, 811, 812].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 343,
+    question: "The same system (FAR=0.1% or 1/1000) is used for IDENTIFICATION (1-to-Many). There are 2,000 users in the database. If an impostor scans their finger, what is the approximate probability of a false match?",
+    options: { a: "0.1%", b: "1%", c: "100%", d: "50%" },
+    correctOption: "c",
+    justification: "Risk scales with database size: 2000 * 0.001 = 2.0, implying a high probability (approx 100%)[cite: 813, 815].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 344,
+    question: "If you tighten a biometric system to reduce False Acceptances (make it harder to get in), what happens to the False Rejection Rate (FRR)?",
+    options: { a: "It decreases.", b: "It stays the same.", c: "It increases (more legitimate users will be accidentally blocked).", d: "It becomes zero." },
+    correctOption: "c",
+    justification: "Tightening the system increases the False Rejection Rate[cite: 816, 818].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 345,
+    question: "Why is \"Identification\" (1-to-Many) generally considered riskier than \"Verification\" (1-to-1)?",
+    options: { a: "Because it is slower.", b: "Because the probability of a false match increases with every user added to the database.", c: "Because it requires a password.", d: "Because it uses older technology." },
+    correctOption: "b",
+    justification: "Identification is riskier because false match probability increases with database size[cite: 819, 820].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 346,
+    question: "What is the primary purpose of \"Auditing\"?",
+    options: { a: "To speed up the database.", b: "To decide what a user is allowed to do.", c: "To record what a user actually did for accountability.", d: "To encrypt user passwords." },
+    correctOption: "c",
+    justification: "Auditing records what a user did for accountability[cite: 822, 823].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 347,
+    question: "A \"Smart Card\" is an example of which authentication factor?",
+    options: { a: "What you know.", b: "What you have.", c: "What you are.", d: "What you do." },
+    correctOption: "b",
+    justification: "A Smart Card is a 'What you have' factor[cite: 825, 826].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 348,
+    question: "Which Access Control model is best suited for an organization with high turnover where permissions are based on job titles (e.g., Manager, Teller)?",
+    options: { a: "DAC", b: "MAC", c: "RBAC (Role-Based Access Control)", d: "ABAC" },
+    correctOption: "c",
+    justification: "RBAC is best suited for high turnover/job title based permissions[cite: 827, 828].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 349,
+    question: "Why are passwords usually \"hashed\" before storage?",
+    options: { a: "To make them shorter.", b: "So that even if the file is stolen, the attacker cannot see the actual passwords.", c: "To make them easier to remember.", d: "To allow the admin to recover them if lost." },
+    correctOption: "b",
+    justification: "Passwords are hashed so attackers cannot see the actual passwords if the file is stolen[cite: 829, 830].",
+    category: "Access Control & Biometrics"
+  },
+  {
+    id: 350,
+    question: "\"Keystroke Recognition\" (typing rhythm) is an example of:",
+    options: { a: "Behavioral Biometrics", b: "Physiological Biometrics", c: "Two-Factor Authentication", d: "Token-based Authentication" },
+    correctOption: "a",
+    justification: "Keystroke recognition is a Behavioral Biometric[cite: 832].",
+    category: "Access Control & Biometrics"
   }
 ];
