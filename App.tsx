@@ -3,6 +3,17 @@ import { User, Question, Progress } from './types';
 import { db } from './services/db';
 import { QUESTIONS } from './data/questions';
 
+// --- Constants ---
+const TOPICS = [
+  { id: 'all', name: 'All Topics', category: null },
+  { id: 'network', name: 'Network Security', category: 'Network Security' },
+  { id: 'access', name: 'Access Control', category: 'Access Control' },
+  { id: 'web', name: 'Web Security', category: 'Web Security' },
+  { id: 'sql', name: 'SQL Injection', category: 'SQL Injection' },
+  { id: 'cookies', name: 'Cookies', category: 'Cookies' },
+  { id: 'xss', name: 'XSS & CSRF', category: 'XSS and CSRF' },
+];
+
 // --- Components ---
 
 const Navbar: React.FC<{ user: User | null; onLogout: () => void; setView: (v: 'dashboard' | 'quiz') => void }> = ({ user, onLogout, setView }) => (
@@ -90,10 +101,11 @@ const AuthScreen: React.FC<{ onLogin: (u: User) => void }> = ({ onLogin }) => {
   );
 };
 
-const Dashboard: React.FC<{ user: User; onStart: () => void; onReset: () => void }> = ({ user, onStart, onReset }) => {
+const Dashboard: React.FC<{ user: User; onStart: (topic: string) => void; onReset: () => void }> = ({ user, onStart, onReset }) => {
   // We use state for progress so the component re-renders and updates the list when reset happens
   const [stats, setStats] = useState(db.getStats(user.id));
   const [progress, setProgress] = useState(db.getUserProgress(user.id));
+  const [selectedTopic, setSelectedTopic] = useState('all');
 
   // Show fewer items (3) as requested
   const recentActivity = [...progress].sort((a, b) => b.timestamp - a.timestamp).slice(0, 3);
@@ -106,6 +118,33 @@ const Dashboard: React.FC<{ user: User; onStart: () => void; onReset: () => void
       setProgress(db.getUserProgress(user.id));
     }
   };
+
+  // Calculate topic-specific stats
+  const getTopicStats = (topicCategory: string | null) => {
+    const topicQuestions = topicCategory 
+      ? QUESTIONS.filter(q => q.category === topicCategory)
+      : QUESTIONS;
+    
+    const topicProgress = progress.filter(p => {
+      const question = QUESTIONS.find(q => q.id === p.questionId);
+      return topicCategory ? question?.category === topicCategory : true;
+    });
+
+    const totalAttempted = topicProgress.length;
+    const totalCorrect = topicProgress.filter(p => p.isCorrect).length;
+    
+    return {
+      total: topicQuestions.length,
+      attempted: totalAttempted,
+      correct: totalCorrect,
+      accuracy: totalAttempted > 0 ? Math.round((totalCorrect / totalAttempted) * 100) : 0,
+      remaining: topicQuestions.length - totalAttempted
+    };
+  };
+
+  const currentTopicStats = getTopicStats(
+    TOPICS.find(t => t.id === selectedTopic)?.category ?? null
+  );
 
   return (
     <div className="container mx-auto p-4 md:p-8 max-w-5xl">
@@ -124,24 +163,72 @@ const Dashboard: React.FC<{ user: User; onStart: () => void; onReset: () => void
         )}
       </header>
 
+      {/* Topic Selector */}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold text-slate-800 mb-3">Choose a Topic</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {TOPICS.map((topic) => {
+            const topicStats = getTopicStats(topic.category);
+            const isSelected = selectedTopic === topic.id;
+            
+            return (
+              <button
+                key={topic.id}
+                onClick={() => setSelectedTopic(topic.id)}
+                className={`p-4 rounded-xl border-2 transition-all text-left ${
+                  isSelected
+                    ? 'border-blue-600 bg-blue-50 shadow-md'
+                    : 'border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm'
+                }`}
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className={`font-bold text-sm ${isSelected ? 'text-blue-900' : 'text-slate-800'}`}>
+                    {topic.name}
+                  </h3>
+                  {isSelected && (
+                    <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-slate-600">Progress</span>
+                    <span className={`font-bold ${isSelected ? 'text-blue-700' : 'text-slate-700'}`}>
+                      {topicStats.attempted}/{topicStats.total}
+                    </span>
+                  </div>
+                  <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-300'}`}
+                      style={{ width: `${(topicStats.attempted / topicStats.total) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="text-xs text-slate-500 font-bold uppercase tracking-wider">Accuracy</div>
-          <div className="text-4xl font-extrabold text-blue-700 mt-2">{stats.accuracy}%</div>
+          <div className="text-4xl font-extrabold text-blue-700 mt-2">{currentTopicStats.accuracy}%</div>
           <div className="mt-3 h-2.5 bg-slate-100 rounded-full overflow-hidden">
-            <div className="h-full bg-blue-600 rounded-full transition-all duration-500" style={{ width: `${stats.accuracy}%` }}></div>
+            <div className="h-full bg-blue-600 rounded-full transition-all duration-500" style={{ width: `${currentTopicStats.accuracy}%` }}></div>
           </div>
         </div>
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="text-xs text-slate-500 font-bold uppercase tracking-wider">Completed</div>
-          <div className="text-4xl font-extrabold text-slate-900 mt-2">{stats.totalAttempted} <span className="text-lg text-slate-400 font-normal">/ {QUESTIONS.length}</span></div>
+          <div className="text-4xl font-extrabold text-slate-900 mt-2">{currentTopicStats.attempted} <span className="text-lg text-slate-400 font-normal">/ {currentTopicStats.total}</span></div>
           <div className="mt-3 h-2.5 bg-slate-100 rounded-full overflow-hidden">
-             <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: `${(stats.totalAttempted / QUESTIONS.length) * 100}%` }}></div>
+             <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: `${(currentTopicStats.attempted / currentTopicStats.total) * 100}%` }}></div>
           </div>
         </div>
          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="text-xs text-slate-500 font-bold uppercase tracking-wider">Remaining</div>
-          <div className="text-4xl font-extrabold text-slate-900 mt-2">{stats.remaining}</div>
+          <div className="text-4xl font-extrabold text-slate-900 mt-2">{currentTopicStats.remaining}</div>
           <p className="text-xs text-slate-500 mt-2 font-medium">Questions left to practice</p>
         </div>
       </div>
@@ -175,12 +262,15 @@ const Dashboard: React.FC<{ user: User; onStart: () => void; onReset: () => void
             <div className="relative z-10">
               <h3 className="text-2xl font-bold mb-3">Ready to continue?</h3>
               <p className="text-slate-300 mb-6 font-medium leading-relaxed">
-                {stats.remaining === 0 
-                  ? "You have attempted all questions! You can review or reset your progress." 
-                  : `Pick up where you left off. Master the remaining ${stats.remaining} questions.`}
+                {currentTopicStats.remaining === 0 
+                  ? `You have completed all questions in ${TOPICS.find(t => t.id === selectedTopic)?.name}! ${selectedTopic === 'all' ? 'Try another topic or review.' : 'Select another topic to continue.'}` 
+                  : `Pick up where you left off. Master the remaining ${currentTopicStats.remaining} questions in ${TOPICS.find(t => t.id === selectedTopic)?.name}.`}
               </p>
-              <button onClick={onStart} className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-bold transition-all w-full md:w-auto shadow-lg shadow-blue-900/50 border border-blue-500">
-                {stats.totalAttempted === 0 ? "Start Quiz" : "Continue Quiz"}
+              <button 
+                onClick={() => onStart(selectedTopic)} 
+                className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-bold transition-all w-full md:w-auto shadow-lg shadow-blue-900/50 border border-blue-500"
+              >
+                {currentTopicStats.attempted === 0 ? "Start Quiz" : "Continue Quiz"}
               </button>
             </div>
             {/* Decoration */}
@@ -192,14 +282,20 @@ const Dashboard: React.FC<{ user: User; onStart: () => void; onReset: () => void
   );
 };
 
-const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComplete }) => {
+const Quiz: React.FC<{ user: User; onComplete: () => void; topicId: string }> = ({ user, onComplete, topicId }) => {
+  // Filter questions by topic
+  const topicCategory = TOPICS.find(t => t.id === topicId)?.category;
+  const filteredQuestions = topicCategory 
+    ? QUESTIONS.filter(q => q.category === topicCategory)
+    : QUESTIONS;
+
   // Logic to calculate initial index: Strictly find the first question ID that has NOT been attempted at all.
   const getInitialIndex = () => {
     const progress = db.getUserProgress(user.id);
     const attemptedIds = new Set(progress.map(p => p.questionId));
     
-    // Find the first question in the list that isn't in the attempted set
-    const firstUnattemptedIndex = QUESTIONS.findIndex(q => !attemptedIds.has(q.id));
+    // Find the first question in the filtered list that isn't in the attempted set
+    const firstUnattemptedIndex = filteredQuestions.findIndex(q => !attemptedIds.has(q.id));
     
     // If all questions are attempted, start from beginning (or 0), otherwise start at the gap
     return firstUnattemptedIndex >= 0 ? firstUnattemptedIndex : 0;
@@ -212,7 +308,8 @@ const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComple
   // When view changes or component remounts, ensure we verify index again if needed, 
   // but useState(getInitialIndex()) handles the initial mount correctly.
 
-  const question = QUESTIONS[currentIndex];
+  const question = filteredQuestions[currentIndex];
+  const totalQuestions = filteredQuestions.length;
 
   const handleOptionSelect = (opt: 'a'|'b'|'c'|'d') => {
     if (isSubmitted) return;
@@ -227,7 +324,7 @@ const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComple
   };
 
   const handleNext = () => {
-    if (currentIndex < QUESTIONS.length - 1) {
+    if (currentIndex < totalQuestions - 1) {
       setCurrentIndex(prev => prev + 1);
       setSelectedOption(null);
       setIsSubmitted(false);
@@ -245,7 +342,7 @@ const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComple
   };
 
   const handleSkip = () => {
-    if (currentIndex < QUESTIONS.length - 1) {
+    if (currentIndex < totalQuestions - 1) {
       setCurrentIndex(prev => prev + 1);
       setSelectedOption(null);
       setIsSubmitted(false);
@@ -281,7 +378,7 @@ const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComple
       
       {/* Progress Header */}
       <div className="mb-6 flex justify-between items-center text-sm font-semibold text-slate-600">
-        <span>Question {currentIndex + 1} of {QUESTIONS.length}</span>
+        <span>Question {currentIndex + 1} of {totalQuestions}</span>
         <span className="bg-slate-200 text-slate-800 px-3 py-1 rounded-full text-xs uppercase tracking-wide">{question.category || "General"}</span>
       </div>
 
@@ -367,7 +464,7 @@ const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComple
                 onClick={handleNext} 
                 className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition-all shadow-md flex items-center gap-2 transform active:scale-95"
               >
-                {currentIndex === QUESTIONS.length - 1 ? 'Finish' : 'Next Question'}
+                {currentIndex === totalQuestions - 1 ? 'Finish' : 'Next Question'}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </button>
              )}
@@ -381,6 +478,7 @@ const Quiz: React.FC<{ user: User; onComplete: () => void }> = ({ user, onComple
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [view, setView] = useState<'dashboard' | 'quiz'>('dashboard');
+  const [selectedTopic, setSelectedTopic] = useState<string>('all');
 
   useEffect(() => {
     const cachedUser = db.getCurrentUser();
@@ -404,6 +502,11 @@ export default function App() {
     }
   };
 
+  const handleStartQuiz = (topicId: string) => {
+    setSelectedTopic(topicId);
+    setView('quiz');
+  };
+
   if (!user) {
     return <AuthScreen onLogin={handleLogin} />;
   }
@@ -412,8 +515,8 @@ export default function App() {
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900">
       <Navbar user={user} onLogout={handleLogout} setView={setView} />
       <main>
-        {view === 'dashboard' && <Dashboard user={user} onStart={() => setView('quiz')} onReset={handleReset} />}
-        {view === 'quiz' && <Quiz user={user} onComplete={() => setView('dashboard')} />}
+        {view === 'dashboard' && <Dashboard user={user} onStart={handleStartQuiz} onReset={handleReset} />}
+        {view === 'quiz' && <Quiz user={user} onComplete={() => setView('dashboard')} topicId={selectedTopic} />}
       </main>
     </div>
   );
