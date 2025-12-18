@@ -173,19 +173,11 @@ const Dashboard: React.FC<{ user: User; onStart: (topic: string) => void; onRese
 
   return (
     <div className="container mx-auto p-4 md:p-8 max-w-5xl">
-      <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+      <header className="mb-8">
         <div>
           <h1 className="text-3xl font-extrabold text-slate-900">Hello, {user.username}</h1>
           <p className="text-slate-600 mt-2 font-medium">Track your preparation progress.</p>
         </div>
-        {stats.totalAttempted > 0 && (
-          <button 
-            onClick={handleReset} 
-            className="text-red-600 hover:text-red-700 text-sm font-semibold hover:bg-red-50 px-3 py-2 rounded transition-colors"
-          >
-            Reset Progress
-          </button>
-        )}
       </header>
 
       {/* Topic Selector */}
@@ -199,48 +191,69 @@ const Dashboard: React.FC<{ user: User; onStart: (topic: string) => void; onRese
             const isSelected = selectedTopic === topic.id;
             
             return (
-              <button
+              <div
                 key={topic.id}
-                onClick={() => setSelectedTopic(topic.id)}
-                className={`w-full p-5 rounded-xl border-2 transition-all text-left ${
+                className={`w-full p-5 rounded-xl border-2 transition-all relative ${
                   isSelected
                     ? 'border-blue-600 bg-gradient-to-r from-blue-50 to-indigo-50 shadow-lg'
                     : 'border-slate-300 bg-white hover:border-blue-400 hover:shadow-md'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                {/* Reset All Progress Button - Only show if there's progress */}
+                {topicStats.attempted > 0 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleReset();
+                    }}
+                    className="absolute top-3 right-3 p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors z-10 flex items-center gap-1 text-xs font-medium"
+                    title="Reset all progress"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
-                    <div>
-                      <h3 className={`font-bold text-base ${isSelected ? 'text-blue-900' : 'text-slate-800'}`}>
-                        {topic.name}
-                      </h3>
-                      <p className="text-xs text-slate-600 mt-0.5">Complete question bank</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-slate-900">{topicStats.attempted}/{topicStats.total}</div>
-                      <div className="text-xs text-slate-500">questions</div>
-                    </div>
-                    {isSelected && (
-                      <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    <span className="hidden sm:inline">Reset All</span>
+                  </button>
+                )}
+                
+                <button
+                  onClick={() => setSelectedTopic(topic.id)}
+                  className="w-full text-left"
+                >
+                  <div className="flex items-center justify-between pr-20">
+                    <div className="flex items-center gap-3">
+                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                       </svg>
-                    )}
+                      <div>
+                        <h3 className={`font-bold text-base ${isSelected ? 'text-blue-900' : 'text-slate-800'}`}>
+                          {topic.name}
+                        </h3>
+                        <p className="text-xs text-slate-600 mt-0.5">Complete question bank</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-slate-900">{topicStats.attempted}/{topicStats.total}</div>
+                        <div className="text-xs text-slate-500">questions</div>
+                      </div>
+                      {isSelected && (
+                        <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="mt-3">
-                  <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-400'}`}
-                      style={{ width: `${(topicStats.attempted / topicStats.total) * 100}%` }}
-                    ></div>
+                  <div className="mt-3">
+                    <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div 
+                        className={`h-full rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-400'}`}
+                        style={{ width: `${(topicStats.attempted / topicStats.total) * 100}%` }}
+                      ></div>
+                    </div>
                   </div>
-                </div>
-              </button>
+                </button>
+              </div>
             );
           })}
         </div>
@@ -260,40 +273,65 @@ const Dashboard: React.FC<{ user: User; onStart: (topic: string) => void; onRese
                 const isSelected = selectedTopic === topic.id;
                 
                 return (
-                  <button
+                  <div
                     key={topic.id}
-                    onClick={() => setSelectedTopic(topic.id)}
-                    className={`p-4 rounded-xl border-2 transition-all text-left ${
+                    className={`p-4 rounded-xl border-2 transition-all relative ${
                       isSelected
                         ? 'border-blue-600 bg-blue-50 shadow-md'
                         : 'border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm'
                     }`}
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <h4 className={`font-bold text-sm leading-tight ${isSelected ? 'text-blue-900' : 'text-slate-800'}`}>
-                        {topic.name}
-                      </h4>
-                      {isSelected && (
-                        <svg className="w-5 h-5 text-blue-600 flex-shrink-0 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    {/* Reset Button - Only show if there's progress */}
+                    {topicStats.attempted > 0 && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (window.confirm(`Reset progress for "${topic.name}"? This will delete ${topicStats.attempted} attempted question(s).`)) {
+                            db.clearCategoryProgress(user.id, topic.category);
+                            // Force refresh
+                            setStats(db.getStats(user.id));
+                            setProgress(db.getUserProgress(user.id));
+                          }
+                        }}
+                        className="absolute top-2 right-2 p-1 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors z-10"
+                        title="Reset topic progress"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                         </svg>
-                      )}
-                    </div>
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs">
-                        <span className="text-slate-600">Progress</span>
-                        <span className={`font-bold ${isSelected ? 'text-blue-700' : 'text-slate-700'}`}>
-                          {topicStats.attempted}/{topicStats.total}
-                        </span>
+                      </button>
+                    )}
+                    
+                    <button
+                      onClick={() => setSelectedTopic(topic.id)}
+                      className="w-full text-left"
+                    >
+                      <div className="flex items-start justify-between mb-2 pr-6">
+                        <h4 className={`font-bold text-sm leading-tight ${isSelected ? 'text-blue-900' : 'text-slate-800'}`}>
+                          {topic.name}
+                        </h4>
+                        {isSelected && (
+                          <svg className="w-5 h-5 text-blue-600 flex-shrink-0 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                        )}
                       </div>
-                      <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-300'}`}
-                          style={{ width: `${(topicStats.attempted / topicStats.total) * 100}%` }}
-                        ></div>
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-600">Progress</span>
+                          <span className={`font-bold ${isSelected ? 'text-blue-700' : 'text-slate-700'}`}>
+                            {topicStats.attempted}/{topicStats.total}
+                          </span>
+                        </div>
+                        <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div 
+                            className={`h-full rounded-full transition-all ${isSelected ? 'bg-blue-600' : 'bg-slate-300'}`}
+                            style={{ width: `${(topicStats.attempted / topicStats.total) * 100}%` }}
+                          ></div>
+                        </div>
                       </div>
-                    </div>
-                  </button>
+                    </button>
+                  </div>
                 );
               })}
             </div>

@@ -81,6 +81,23 @@ export const db = {
     localStorage.setItem(PROGRESS_KEY, JSON.stringify(otherUsersProgress));
   },
 
+  clearCategoryProgress: (userId: string, category: string | null) => {
+    const progressStr = localStorage.getItem(PROGRESS_KEY);
+    const allProgress: Progress[] = progressStr ? JSON.parse(progressStr) : [];
+    
+    // Get question IDs for the specified category
+    const categoryQuestionIds = category 
+      ? QUESTIONS.filter(q => q.category === category).map(q => q.id)
+      : QUESTIONS.map(q => q.id);
+    
+    // Remove progress for questions in this category for this user
+    const filteredProgress = allProgress.filter(p => 
+      !(p.userId === userId && categoryQuestionIds.includes(p.questionId))
+    );
+    
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(filteredProgress));
+  },
+
   getStats: (userId: string): UserStats => {
     const userProgress = db.getUserProgress(userId);
     const totalAttempted = userProgress.length;
